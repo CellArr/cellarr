@@ -192,7 +192,7 @@ class CellArrDataset:
                     UserWarning,
                 )
 
-                if dom[0][1] > num_cells:
+                if dom[1][1] > num_rows:
                     raise RuntimeError(f"Matrix {mname} has more genes than expected.")
 
     def __del__(self):
