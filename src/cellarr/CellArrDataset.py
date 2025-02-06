@@ -29,6 +29,7 @@ Example:
 
 from functools import lru_cache
 from typing import List, Optional, Sequence, Union
+from warnings import warn
 
 import pandas as pd
 import tiledb
@@ -177,8 +178,22 @@ class CellArrDataset:
 
         for mname, muri in self._matrix_tdb.items():
             dom = muri.nonempty_domain()
-            if dom[0][1] != num_cells or dom[1][1] != num_rows:
-                raise RuntimeError(f"Matrix {mname} has incorrect dimensions")
+            if dom[0][1] != num_cells:
+                warn(
+                    f"Matrix {mname} has fewer cells than expected - some cells may not have any gene expression.",
+                    UserWarning,
+                )
+                if dom[0][1] > num_cells:
+                    raise RuntimeError(f"Matrix {mname} has more cells than expected.")
+
+            if dom[1][1] != num_rows:
+                warn(
+                    f"Matrix {mname} has fewer genes than expected - some genes may not be expressed in any cells.",
+                    UserWarning,
+                )
+
+                if dom[0][1] > num_cells:
+                    raise RuntimeError(f"Matrix {mname} has more genes than expected.")
 
     def __del__(self):
         self._gene_annotation_tdb.close()
