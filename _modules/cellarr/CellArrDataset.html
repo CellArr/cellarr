@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
-        <title>cellarr.CellArrDataset - cellarr 0.5.4 documentation</title>
+        <title>cellarr.CellArrDataset - cellarr 0.5.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">cellarr 0.5.4 documentation</div></a>
+      <a href="../../index.html"><div class="brand">cellarr 0.5.5 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">cellarr 0.5.4 documentation</span>
+  <span class="sidebar-brand-text">cellarr 0.5.5 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -282,6 +282,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tiledb</span>
@@ -455,12 +456,26 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">num_cells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell_metadata_tdb</span><span class="o">.</span><span class="n">nonempty_domain</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">num_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gene_annotation_tdb</span><span class="o">.</span><span class="n">nonempty_domain</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">num_feats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gene_annotation_tdb</span><span class="o">.</span><span class="n">nonempty_domain</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="k">for</span> <span class="n">mname</span><span class="p">,</span> <span class="n">muri</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matrix_tdb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">dom</span> <span class="o">=</span> <span class="n">muri</span><span class="o">.</span><span class="n">nonempty_domain</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">num_cells</span> <span class="ow">or</span> <span class="n">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">num_rows</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matrix </span><span class="si">{</span><span class="n">mname</span><span class="si">}</span><span class="s2"> has incorrect dimensions&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">num_cells</span><span class="p">:</span>
+                <span class="n">warn</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Matrix </span><span class="si">{</span><span class="n">mname</span><span class="si">}</span><span class="s2"> has fewer cells than expected - some cells may not have any gene expression.&quot;</span><span class="p">,</span>
+                    <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">num_cells</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matrix </span><span class="si">{</span><span class="n">mname</span><span class="si">}</span><span class="s2"> has more cells than expected.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">num_feats</span><span class="p">:</span>
+                <span class="n">warn</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Matrix </span><span class="si">{</span><span class="n">mname</span><span class="si">}</span><span class="s2"> has fewer genes than expected - some genes may not be expressed in any cells.&quot;</span><span class="p">,</span>
+                    <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">num_feats</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matrix </span><span class="si">{</span><span class="n">mname</span><span class="si">}</span><span class="s2"> has more genes than expected.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="CellArrDataset.__del__">
 <a class="viewcode-back" href="../../api/cellarr.html#cellarr.CellArrDataset.CellArrDataset.__del__">[docs]</a>
@@ -1058,7 +1073,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=e1a677a5"></script>
+</div><script src="../../_static/documentation_options.js?v=45def3bc"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
