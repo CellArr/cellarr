@@ -60,6 +60,7 @@ class SlurmBuilder:
         args: Dict,
         dependencies: Optional[str] = None,
         python_env: str = "",
+        sbatch_extra_args: str = "",
     ) -> str:
         """Create a SLURM job submission script."""
         script = f"""#!/bin/bash
@@ -69,6 +70,7 @@ class SlurmBuilder:
 #SBATCH --time={self.time_hours}:00:00
 #SBATCH --mem={self.memory_gb}G
 #SBATCH --cpus-per-task={self.cpus_per_task}
+{sbatch_extra_args}
 """
         if dependencies:
             script += f"#SBATCH --dependency={dependencies}\n"
@@ -91,6 +93,7 @@ python {python_script} '{json.dumps(args)}'
         n_tasks: int,
         dependencies: Optional[str] = None,
         python_env: str = "",
+        sbatch_extra_args: str = "",
     ) -> str:
         """Create a SLURM array job submission script."""
         script = f"""#!/bin/bash
@@ -101,6 +104,7 @@ python {python_script} '{json.dumps(args)}'
 #SBATCH --mem={self.memory_gb}G
 #SBATCH --cpus-per-task={self.cpus_per_task}
 #SBATCH --array=0-{n_tasks-1}
+{sbatch_extra_args}
 """
         if dependencies:
             script += f"#SBATCH --dependency={dependencies}\n"
@@ -120,7 +124,9 @@ python {python_script} '{json.dumps(args)}'
         result = subprocess.run(["sbatch", script_path], capture_output=True, text=True)
         return result.stdout.strip().split()[-1]
 
-    def submit_gene_annotation_job(self, files: List[str], gene_options: Dict, python_env: str) -> str:
+    def submit_gene_annotation_job(
+        self, files: List[str], gene_options: Dict, python_env: str, sbatch_extra_args: str
+    ) -> str:
         """Submit gene annotation processing job."""
         args = {
             "files": files,
@@ -136,11 +142,12 @@ python {python_script} '{json.dumps(args)}'
             python_script=f"{parent_dir}/process_gene_annotation.py",
             args=args,
             python_env=python_env,
+            sbatch_extra_args=sbatch_extra_args,
         )
         return self.submit_job(script_path)
 
     def submit_sample_metadata_job(
-        self, files: List[str], sample_options: Dict, dependency: str, python_env: str
+        self, files: List[str], sample_options: Dict, dependency: str, python_env: str, sbatch_extra_args: str
     ) -> str:
         """Submit sample metadata processing job."""
         args = {
@@ -157,11 +164,14 @@ python {python_script} '{json.dumps(args)}'
             python_script=f"{parent_dir}/process_sample_metadata.py",
             args=args,
             python_env=python_env,
+            sbatch_extra_args=sbatch_extra_args,
             # dependencies=f"afterok:{dependency}",
         )
         return self.submit_job(script_path)
 
-    def submit_cell_metadata_job(self, files: List[str], cell_options: Dict, dependency: str, python_env: str) -> str:
+    def submit_cell_metadata_job(
+        self, files: List[str], cell_options: Dict, dependency: str, python_env: str, sbatch_extra_args: str
+    ) -> str:
         """Submit cell metadata processing job."""
         args = {
             "files": files,
@@ -177,12 +187,13 @@ python {python_script} '{json.dumps(args)}'
             python_script=f"{parent_dir}/process_cell_metadata.py",
             args=args,
             python_env=python_env,
+            sbatch_extra_args=sbatch_extra_args,
             # dependencies=f"afterok:{dependency}",
         )
         return self.submit_job(script_path)
 
     def submit_matrix_processing(
-        self, files: List[str], matrix_options: Dict, dependency: str, python_env: str
+        self, files: List[str], matrix_options: Dict, dependency: str, python_env: str, sbatch_extra_args: str
     ) -> Tuple[str, str]:
         """Submit matrix processing as SLURM array job."""
 
@@ -213,6 +224,7 @@ python {python_script} '{json.dumps(args)}'
             n_tasks=len(files),
             dependencies=f"afterok:{dependency}",
             python_env=python_env,
+            sbatch_extra_args=sbatch_extra_args,
         )
         array_job_id = self.submit_job(array_script)
 
@@ -230,12 +242,15 @@ python {python_script} '{json.dumps(args)}'
             args=final_args,
             dependencies=f"afterok:{array_job_id}",
             python_env=python_env,
+            sbatch_extra_args=sbatch_extra_args,
         )
         final_job_id = self.submit_job(final_script)
 
         return array_job_id, final_job_id
 
-    def submit_final_assembly(self, matrix_names: List[str], dependencies: List[str], python_env: str) -> str:
+    def submit_final_assembly(
+        self, matrix_names: List[str], dependencies: List[str], python_env: str, sbatch_extra_args: str
+    ) -> str:
         """Submit final assembly job."""
         args = {"input_dir": str(self.output_dir), "output_dir": str(self.output_dir), "matrix_names": matrix_names}
 
@@ -247,6 +262,7 @@ python {python_script} '{json.dumps(args)}'
             args=args,
             dependencies=f"afterok:{','.join(dependencies)}",
             python_env=python_env,
+            sbatch_extra_args=sbatch_extra_args,
         )
         return self.submit_job(script_path)
 
@@ -286,15 +302,23 @@ def main():
 
     # Submit jobs
     gene_job_id = builder.submit_gene_annotation_job(
-        manifest["files"], manifest.get("gene_options", {}), manifest["python_env"]
+        manifest["files"], manifest.get("gene_options", {}), manifest["python_env"], manifest["sbatch_extra_args"]
     )
 
     sample_job_id = builder.submit_sample_metadata_job(
-        manifest["files"], manifest.get("sample_options", {}), gene_job_id, manifest["python_env"]
+        manifest["files"],
+        manifest.get("sample_options", {}),
+        gene_job_id,
+        manifest["python_env"],
+        manifest["sbatch_extra_args"],
     )
 
     cell_job_id = builder.submit_cell_metadata_job(
-        manifest["files"], manifest.get("cell_options", {}), sample_job_id, manifest["python_env"]
+        manifest["files"],
+        manifest.get("cell_options", {}),
+        sample_job_id,
+        manifest["python_env"],
+        manifest["sbatch_extra_args"],
     )
 
     # Process matrices
@@ -305,13 +329,20 @@ def main():
     matrix_job_ids = []
     for matrix_opt in matrix_options:
         _, final_id = builder.submit_matrix_processing(
-            manifest["files"], matrix_opt, f"{cell_job_id},{gene_job_id}", manifest["python_env"]
+            manifest["files"],
+            matrix_opt,
+            f"{cell_job_id},{gene_job_id}",
+            manifest["python_env"],
+            manifest["sbatch_extra_args"],
         )
         matrix_job_ids.append(final_id)
 
     # Submit final assembly
     builder.submit_final_assembly(
-        [opt["matrix_name"] for opt in matrix_options], matrix_job_ids, manifest["python_env"]
+        [opt["matrix_name"] for opt in matrix_options],
+        matrix_job_ids,
+        manifest["python_env"],
+        manifest["sbatch_extra_args"],
     )
 
 
