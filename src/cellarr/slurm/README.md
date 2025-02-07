@@ -47,7 +47,12 @@ conda activate biocpy_miniforge
 ~/.conda/envs/biocpy_miniforge/bin/python --version
 which python
 python --version
-    """,
+""",
+    "sbatch_extra_args": """
+#SBATCH --qos=short
+#SBATCH --partition=defq
+#SBATCH -t 0-02:00
+"""
 }
 ```
 
