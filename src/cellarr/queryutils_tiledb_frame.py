@@ -137,29 +137,29 @@ def subset_array(
     data = tiledb_obj.multi_index[row_subset, column_subset]
 
     # Fallback just in case
-    # shape = (
-    #     tiledb_obj.nonempty_domain()[0][1] + 1,
-    #     tiledb_obj.nonempty_domain()[1][1] + 1,
-    # )
-
-    # mat = sp.coo_matrix(
-    #     (data["data"], (data["cell_index"], data["gene_index"])),
-    #     shape=shape,
-    # ).tocsr()
-
-    # if row_subset is not None:
-    #     mat = mat[row_subset, :]
-
-    # if column_subset is not None:
-    #     mat = mat[:, column_subset]
-
-    _cell_rows, _ = _remap_index(data["cell_index"])
-    _gene_cols, _ = _remap_index(data["gene_index"])
+    shape = (
+        tiledb_obj.nonempty_domain()[0][1] + 1,
+        tiledb_obj.nonempty_domain()[1][1] + 1,
+    )
 
     mat = sp.coo_matrix(
-        (data["data"], (_cell_rows, _gene_cols)),
+        (data["data"], (data["cell_index"], data["gene_index"])),
         shape=shape,
-    )
+    ).tocsr()
+
+    if row_subset is not None:
+        mat = mat[row_subset, :]
+
+    if column_subset is not None:
+        mat = mat[:, column_subset]
+
+    # _cell_rows, _ = _remap_index(data["cell_index"])
+    # _gene_cols, _ = _remap_index(data["gene_index"])
+
+    # mat = sp.coo_matrix(
+    #     (data["data"], (_cell_rows, _gene_cols)),
+    #     shape=shape,
+    # )
 
     return mat
 
