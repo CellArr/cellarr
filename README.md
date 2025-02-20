@@ -121,7 +121,7 @@ dataset = build_cellarrdataset(
 print(dataset)
 ```
 
-Check out the [documentation](https://biocpy.github.io/cellarr/tutorial.html) for more details.
+Check out the [documentation](https://cellarr.github.io/cellarr/tutorial.html) for more details.
 
 ### Building on HPC environments with `slurm`
 
@@ -257,7 +257,7 @@ trainer.fit(autoencoder, datamodule=datamodule)
 autoencoder.save_all(model_path=model_path)
 ```
 
-Check out the [documentation](https://biocpy.github.io/cellarr/api/modules.html) for more details.
+Check out the [documentation](https://cellarr.github.io/cellarr/api/modules.html) for more details.
 
 <!-- pyscaffold-notes -->
 

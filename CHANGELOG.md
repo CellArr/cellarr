@@ -17,7 +17,7 @@
 ## Version 0.5.0
 
 - Construct cellarr TileDB files on HPC environments based on slurm
-(reference: [#61](https://github.com/BiocPy/cellarr/pull/61))
+(reference: [#61](https://github.com/cellarr/cellarr/pull/61))
 
 ## Version 0.4.0
 
