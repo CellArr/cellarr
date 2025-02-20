@@ -55,7 +55,7 @@ This step ensures consistency in gene measurement and order, even if
 some genes are unmeasured or ordered differently in the original experiments.
 
 :::{note}
-Check out the [reference](https://biocpy.github.io/cellarr/api/cellarr#module-cellarr.build_cellarrdataset) documentation for modifying the parameters for any of these steps.
+Check out the [reference](https://cellarr.github.io/cellarr/api/cellarr#module-cellarr.build_cellarrdataset) documentation for modifying the parameters for any of these steps.
 :::
 
 ![`CellArrDataset` structure](../assets/cellarr.png "CellArrDataset")
@@ -288,4 +288,4 @@ autoencoder.save_all(model_path=model_path)
 
 ---
 
-Check out the [documentation](https://biocpy.github.io/cellarr/api/modules.html) for more details.
+Check out the [documentation](https://cellarr.github.io/cellarr/api/modules.html) for more details.
