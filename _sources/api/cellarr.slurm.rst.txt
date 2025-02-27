@@ -9,69 +9,69 @@ cellarr.slurm.build\_cellarr\_steps module
 
 .. automodule:: cellarr.slurm.build_cellarr_steps
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.final\_assembly module
 ------------------------------------
 
 .. automodule:: cellarr.slurm.final_assembly
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.finalize\_matrix module
 -------------------------------------
 
 .. automodule:: cellarr.slurm.finalize_matrix
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.process\_cell\_metadata module
 --------------------------------------------
 
 .. automodule:: cellarr.slurm.process_cell_metadata
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.process\_gene\_annotation module
 ----------------------------------------------
 
 .. automodule:: cellarr.slurm.process_gene_annotation
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.process\_matrix module
 ------------------------------------
 
 .. automodule:: cellarr.slurm.process_matrix
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.process\_matrix\_all module
 -----------------------------------------
 
 .. automodule:: cellarr.slurm.process_matrix_all
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.slurm.process\_sample\_metadata module
 ----------------------------------------------
 
 .. automodule:: cellarr.slurm.process_sample_metadata
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: cellarr.slurm
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

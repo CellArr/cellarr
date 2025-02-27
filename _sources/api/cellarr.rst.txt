@@ -17,85 +17,85 @@ cellarr.CellArrDataset module
 
 .. automodule:: cellarr.CellArrDataset
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.CellArrDatasetSlice module
 ----------------------------------
 
 .. automodule:: cellarr.CellArrDatasetSlice
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.autoencoder module
 --------------------------
 
 .. automodule:: cellarr.autoencoder
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.build\_cellarrdataset module
 ------------------------------------
 
 .. automodule:: cellarr.build_cellarrdataset
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.build\_options module
 -----------------------------
 
 .. automodule:: cellarr.build_options
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.buildutils\_tiledb\_array module
 ----------------------------------------
 
 .. automodule:: cellarr.buildutils_tiledb_array
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.buildutils\_tiledb\_frame module
 ----------------------------------------
 
 .. automodule:: cellarr.buildutils_tiledb_frame
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.dataloader module
 -------------------------
 
 .. automodule:: cellarr.dataloader
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.queryutils\_tiledb\_frame module
 ----------------------------------------
 
 .. automodule:: cellarr.queryutils_tiledb_frame
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 cellarr.utils\_anndata module
 -----------------------------
 
 .. automodule:: cellarr.utils_anndata
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: cellarr
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
