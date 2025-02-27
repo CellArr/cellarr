@@ -8,7 +8,10 @@ Cell Arrays is a Python package that provides a TileDB-backed store for large co
 The `CellArrDataset` is designed to store single-cell RNA-seq
 datasets but can be generalized to store any 2-dimensional experimental data.
 
-Check out the tutorial using a couple of cellXgene datasets [here](https://cellarr.github.io/cellarr/tutorial_cellxgene.html)
+> [!NOTE]
+>
+> Check out the tutorial using cellXgene datasets [here](https://cellarr.github.io/cellarr/tutorial_cellxgene.html).
+
 
 ## Install
 
