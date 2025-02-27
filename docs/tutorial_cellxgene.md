@@ -281,7 +281,6 @@ mean_expression_by_cell_type = gene_with_meta[
     ["cell_type"] + ad_gene_list
 ].groupby("cell_type").sum()
 
-# Plot a beautiful heatmap - cell biologists love these!
 sns.heatmap(mean_expression_by_cell_type, cmap="crest")
 ```
 
