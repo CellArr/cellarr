@@ -15,7 +15,8 @@ pip install cellarr
 ```{toctree}
 :maxdepth: 2
 
-Overview <tutorial>
+Overview <intro>
+Tutorial using cellXgene datasets <tutorial_cellxgene>
 Usage Notes <notes>
 Module Reference <api/modules>
 Authors <authors>

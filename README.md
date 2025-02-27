@@ -8,6 +8,8 @@ Cell Arrays is a Python package that provides a TileDB-backed store for large co
 The `CellArrDataset` is designed to store single-cell RNA-seq
 datasets but can be generalized to store any 2-dimensional experimental data.
 
+Check out the tutorial using a couple of cellXgene datasets [here](https://cellarr.github.io/cellarr/tutorial_cellxgene.html)
+
 ## Install
 
 To get started, install the package from [PyPI](https://pypi.org/project/cellarr/)
@@ -28,7 +30,7 @@ Building a `CellArrDataset` generates 4 TileDB files in the specified output dir
 - `gene_annotation`: A TileDB file containing feature/gene annotations.
 - `sample_metadata`: A TileDB file containing sample metadata.
 - `cell_metadata`: A TileDB file containing cell metadata including mapping to the samples
-they are tagged with in ``sample_metadata``.
+  they are tagged with in `sample_metadata`.
 - An `assay` TileDB group containing various matrices. This allows the package to store multiple different matrices, e.g. 'counts', 'normalized', 'scaled' for the same sample/cell and gene attributes.
 
 The organization is inspired by Bioconductor's `SummarizedExperiment` data structure.
@@ -39,7 +41,7 @@ collection is usually the cells rather than genes.
 
 ![`CellArrDataset` structure](./assets/cellarr.png "CellArrDataset")
 
-***Note: Currently only supports either paths to H5AD or `AnnData` objects***
+**_Note: Currently only supports either paths to H5AD or `AnnData` objects_**
 
 To build a `CellArrDataset` from a collection of `H5AD` or `AnnData` objects:
 
@@ -81,23 +83,23 @@ dataset = build_cellarrdataset(
 The build process usually involves 4 steps:
 
 1. **Scan the Collection**: Scan the entire collection of files to create
-a unique set of feature ids (e.g. gene symbols). Store this set as the
-`gene_annotation` TileDB file.
+   a unique set of feature ids (e.g. gene symbols). Store this set as the
+   `gene_annotation` TileDB file.
 
 2. **Sample Metadata**: Store sample metadata in `sample_metadata`
-TileDB file. Each file is typically considered a sample, and an automatic
-mapping is created between files and samples if metadata is not provided.
+   TileDB file. Each file is typically considered a sample, and an automatic
+   mapping is created between files and samples if metadata is not provided.
 
 3. **Store Cell Metadata**: Store cell metadata in the `cell_metadata`
-TileDB file.
+   TileDB file.
 
 4. **Remap and Orient Data**: For each dataset in the collection,
-remap and orient the feature dimension using the feature set from Step 1.
-This step ensures consistency in gene measurement and order, even if
-some genes are unmeasured or ordered differently in the original experiments.
+   remap and orient the feature dimension using the feature set from Step 1.
+   This step ensures consistency in gene measurement and order, even if
+   some genes are unmeasured or ordered differently in the original experiments.
 
-***Note: The objects to build the `CellArrDataset` are expected to be fairly consistent, especially along the feature dimension.
-if these are `AnnData` or `H5AD`objects, all objects must contain an index (in the `var` slot) specifying the gene symbols.***
+**_Note: The objects to build the `CellArrDataset` are expected to be fairly consistent, especially along the feature dimension.
+if these are `AnnData` or `H5AD`objects, all objects must contain an index (in the `var` slot) specifying the gene symbols._**
 
 #### Optionally provide cell metadata columns
 
@@ -128,7 +130,7 @@ Check out the [documentation](https://cellarr.github.io/cellarr/tutorial.html) f
 To simplify building TileDB files on HPC environments that use `slurm`, there are a few steps you need to follow.
 
 - Step 1: Construct a manifest file
-A minimal manifest file (json) must contain the following fields
+  A minimal manifest file (json) must contain the following fields
 - `"files"`: A list of file path to the input `h5ad` objects.
 - `"python_env"`: A set of commands to activate the Python environment containing this package and its dependencies.
 
@@ -163,7 +165,7 @@ json.dump(manifest, open("your/path/to/manifest.json", "w"))
 For more options, check out the [README](./src/cellarr/slurm/README.md).
 
 - Step 2: Submit the job
-Once your manifest file is ready, you can submit the necessary jobs using the `cellarr_build` CLI. Run the following command:
+  Once your manifest file is ready, you can submit the necessary jobs using the `cellarr_build` CLI. Run the following command:
 
 ```sh
 cellarr_build --input-manifest your/path/to/manifest.json --output-dir your/path/to/output --memory-per-job 8 --cpus-per-task 2
