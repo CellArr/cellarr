@@ -31,8 +31,8 @@ First, let's grab those datasets.
 ```
 
 ```python
-files = ["fc6eb410-6603-4e98-9d5f-32c20ffa2456.h5ad", 
-        "da57b970-3c33-49bb-a951-bfc9b99dbd23.h5ad", 
+files = ["fc6eb410-6603-4e98-9d5f-32c20ffa2456.h5ad",
+        "da57b970-3c33-49bb-a951-bfc9b99dbd23.h5ad",
         "e4e24745-5822-4838-8ad9-41e116b71964.h5ad",
         "e2012ca6-059f-4af7-80fe-886579bfaeee.h5ad",
         "f9bca543-f82a-4863-bd62-b270b634ea10.h5ad"]
@@ -60,7 +60,7 @@ feature_set = set()
 
 for i in tqdm(files):
     feature_set = feature_set.union(get_feature_space(i))
-    
+
 print("Total # of features:", len(feature_set))
 ```
 
@@ -101,7 +101,7 @@ combined_obs = pd.concat(obs, ignore_index=True, axis=0, sort=False).astype(pd.S
 combined_cell_df = combined_obs.reset_index(drop=True)
 
 # Let's keep only the columns we actually care about - goodbye, clutter!
-columns_to_keep = ["donor_id", "sample_source", "tissue_type", 
+columns_to_keep = ["donor_id", "sample_source", "tissue_type",
                   "is_primary_data", "author_cell_type", "cell_type", "disease", "sex", "tissue"]
 CELL_ANNOTATIONS_DF = combined_cell_df[columns_to_keep]
 CELL_ANNOTATIONS_DF  # Behold, your streamlined metadata!
@@ -140,7 +140,7 @@ import shutil
 output_dir = "./my_collection.tdb"
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
-    
+
 os.mkdir(output_dir)
 
 # Build the dataset - this is where the magic happens!
@@ -180,7 +180,7 @@ cfg = tiledb.Config()
 output_dir = "./my_collection.tdb"
 
 my_collection = CellArrDataset(output_dir, config_or_context=cfg)
-my_collection 
+my_collection
 ```
 
 Get a quick list of all available gene symbols:
@@ -268,7 +268,7 @@ import seaborn as sns
 gene_with_meta = pd.concat(
     [
         pd.DataFrame(
-            ad_exprs.matrix["counts"].todense(), 
+            ad_exprs.matrix["counts"].todense(),
             columns=ad_gene_list
         ).reset_index(drop=True),
         ad_exprs.cell_metadata.reset_index(drop=True)

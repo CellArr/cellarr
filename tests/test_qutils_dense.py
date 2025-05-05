@@ -39,4 +39,3 @@ def test_query_cellarrdataset():
 
     assert res.shape == (2,4)
     assert np.all(res == np.array([[1, 2, 3, 4], [5, 6, 7, 8]]))
-
