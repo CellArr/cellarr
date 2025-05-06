@@ -147,10 +147,10 @@ def subset_array(
         shape=shape,
     ).tocsr()
 
-    if row_subset is not None:
+    if row_subset is not None and row_subset != slice(None):
         mat = mat[row_subset, :]
 
-    if column_subset is not None:
+    if column_subset is not None and column_subset != slice(None):
         mat = mat[:, column_subset]
 
     # _cell_rows, _ = _remap_index(data["cell_index"])
