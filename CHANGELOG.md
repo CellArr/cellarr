@@ -2,7 +2,7 @@
 
 ## Version 0.5.6 - 0.5.9
 
-- slrum runner's manifest now accepts an additional key: "sbatch_extra_args", to add any additional SBATCH headers to the generated scripts. 
+- slrum runner's manifest now accepts an additional key: "sbatch_extra_args", to add any additional SBATCH headers to the generated scripts.
 - Added tutorial using cellxgene collection.
 - Fixed an issue with slicing when subset arguments are either `None` or `slice(None)`
 
