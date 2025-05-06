@@ -2,7 +2,7 @@
 
 ## Version 0.5.6
 
-- slrum runner's manifest now accepts an additional key: "sbatch_extra_args", to add any additional SBATCH headers to the generated scripts. 
+- slrum runner's manifest now accepts an additional key: "sbatch_extra_args", to add any additional SBATCH headers to the generated scripts.
 
 ## Version 0.5.3 - 0.5.6
 
