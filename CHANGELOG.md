@@ -4,11 +4,12 @@
 
 - slrum runner's manifest now accepts an additional key: "sbatch_extra_args", to add any additional SBATCH headers to the generated scripts. 
 
-## Version 0.5.3 - 0.5.5
+## Version 0.5.3 - 0.5.6
 
 - 'config'  is renamed to 'context_or_config' to accept both TileDB's context or config objects. This supports in-memory TileDB contexts from [Phil](https://github.com/hanslovsky) [[#79](https://github.com/TileOme/cellarr/pull/79)].
 - Fixes the condition for path to assay groups.
 - Supports querying of dense arrays with the `CellArrDataset` class.
+- Fixed an issue with slicing when subset arguments are either `None` or `slice(None)`.
 
 ## Version 0.5.1 - 0.5.2
 
