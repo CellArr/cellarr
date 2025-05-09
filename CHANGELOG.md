@@ -2,7 +2,7 @@
 
 ## Version 0.6.0
 
-- Reorganize code into modules. 
+- Reorganize code into modules.
 - Update github action for tests.
 
 ## Version 0.5.6 - 0.5.9
