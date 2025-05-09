@@ -1,0 +1,29 @@
+cellarr.ml package
+==================
+
+Submodules
+----------
+
+cellarr.ml.autoencoder module
+-----------------------------
+
+.. automodule:: cellarr.ml.autoencoder
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cellarr.ml.dataloader module
+----------------------------
+
+.. automodule:: cellarr.ml.dataloader
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: cellarr.ml
+   :members:
+   :show-inheritance:
+   :undoc-members:

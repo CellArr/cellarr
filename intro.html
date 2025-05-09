@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CellArr Collections: Using cellxgene datasets" href="tutorial_cellxgene.html" /><link rel="prev" title="cellarr" href="index.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>Cell Arrays - cellarr 0.5.9 documentation</title>
+        <title>Cell Arrays - cellarr 0.6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">cellarr 0.5.9 documentation</div></a>
+      <a href="index.html"><div class="brand">cellarr 0.6.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">cellarr 0.5.9 documentation</span>
+  <span class="sidebar-brand-text">cellarr 0.6.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,7 +209,10 @@
 <li class="toctree-l1"><a class="reference internal" href="notes.html">Usage Notes</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api/modules.html">Module Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="api/cellarr.html">cellarr package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cellarr package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/cellarr.build.html">cellarr.build package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/cellarr.ml.html">cellarr.ml package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/cellarr.slurm.html">cellarr.slurm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/cellarr.utils.html">cellarr.utils package</a></li>
 </ul>
 </li>
 </ul>
@@ -384,36 +387,36 @@ AnnData object with n_obs × n_vars = 1000 × 100
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build_cellarrdataset.py:247: UserWarning: Scanning all files for feature ids (e.g. gene symbols) and cell annotations, this may take long, Please also make sure you have enough memory.
-  warnings.warn(
-/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build_cellarrdataset.py:299: UserWarning: Scanning all files to compute cell counts, this may take long
-  warnings.warn(
-/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build_cellarrdataset.py:306: UserWarning: Sample metadata is not provided, each dataset in &#39;files&#39; is considered a sample
-  warnings.warn(
-/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build_cellarrdataset.py:337: UserWarning: Scanning all files for feature ids (e.g. gene symbols), this may take long
-  warnings.warn(
-/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build_cellarrdataset.py:358: UserWarning: Scanning all files to compute cell counts, this may take long
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimizing /tmp/tmpn1aqk1lq/gene_annotation
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimizing /tmp/tmp654zk8l_/gene_annotation
 Fragments before consolidation: 1
 Fragments after consolidation: 1
-Optimizing /tmp/tmpn1aqk1lq/sample_metadata
+Optimizing /tmp/tmp654zk8l_/sample_metadata
 Fragments before consolidation: 1
 Fragments after consolidation: 1
-Optimizing /tmp/tmpn1aqk1lq/cell_metadata
+Optimizing /tmp/tmp654zk8l_/cell_metadata
 Fragments before consolidation: 1
 Fragments after consolidation: 1
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimizing /tmp/tmpn1aqk1lq/assays/counts
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build/build_cellarrdataset.py:247: UserWarning: Scanning all files for feature ids (e.g. gene symbols) and cell annotations, this may take long, Please also make sure you have enough memory.
+  warnings.warn(
+/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build/build_cellarrdataset.py:299: UserWarning: Scanning all files to compute cell counts, this may take long
+  warnings.warn(
+/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build/build_cellarrdataset.py:306: UserWarning: Sample metadata is not provided, each dataset in &#39;files&#39; is considered a sample
+  warnings.warn(
+/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build/build_cellarrdataset.py:337: UserWarning: Scanning all files for feature ids (e.g. gene symbols), this may take long
+  warnings.warn(
+/home/runner/work/cellarr/cellarr/.tox/docs/lib/python3.11/site-packages/cellarr/build/build_cellarrdataset.py:358: UserWarning: Scanning all files to compute cell counts, this may take long
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimizing /tmp/tmp654zk8l_/assays/counts
 Fragments before consolidation: 2
 Fragments after consolidation: 1
 class: CellArrDataset
 number_of_rows: 1100
 number_of_columns: 1000
-path: &#39;/tmp/tmpn1aqk1lq&#39;
+path: &#39;/tmp/tmp654zk8l_&#39;
 </pre></div>
 </div>
 </div>
@@ -678,7 +681,7 @@ Additionally users may also provide the gene space to train their models.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=9a3cda14"></script>
+</div><script src="_static/documentation_options.js?v=8fa8b3e9"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

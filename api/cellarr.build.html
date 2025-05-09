@@ -1,0 +1,1415 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="cellarr.ml package" href="cellarr.ml.html" /><link rel="prev" title="cellarr package" href="cellarr.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>cellarr.build package - cellarr 0.6.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">cellarr 0.6.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">cellarr 0.6.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Cell Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#install-the-package">Install the package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#build-the-cellarrdataset">Build the <code class="docutils literal notranslate"><span class="pre">CellArrDataset</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#query-a-cellarrdataset">Query a <code class="docutils literal notranslate"><span class="pre">CellArrDataset</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#a-single-cell-dataloader">A single cell dataloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial_cellxgene.html">Tutorial using cellXgene datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes.html">Usage Notes</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Module Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="cellarr.html">cellarr package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cellarr package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">cellarr.build package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cellarr.ml.html">cellarr.ml package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cellarr.slurm.html">cellarr.slurm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cellarr.utils.html">cellarr.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributions &amp; Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/api/cellarr.build.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="cellarr-build-package">
+<h1>cellarr.build package<a class="headerlink" href="#cellarr-build-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-cellarr.build.build_cellarr_steps">
+<span id="cellarr-build-build-cellarr-steps-module"></span><h2>cellarr.build.build_cellarr_steps module<a class="headerlink" href="#module-cellarr.build.build_cellarr_steps" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cellarr.build.build_cellarr_steps.</span></span><span class="sig-name descname"><span class="pre">SlurmBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_hours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpus_per_task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>SLURM-based builder for CellArrDataset.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_hours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpus_per_task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize the SLURM builder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_dir</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to final output directory.</p></li>
+<li><p><strong>log_dir</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to store SLURM logs.</p></li>
+<li><p><strong>temp_dir</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path for temporary files.</p></li>
+<li><p><strong>memory_gb</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Memory per job in GB.</p></li>
+<li><p><strong>time_hours</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Time limit per job in hours.</p></li>
+<li><p><strong>cpus_per_task</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – CPUs per task.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.create_array_script">
+<span class="sig-name descname"><span class="pre">create_array_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_script</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.create_array_script"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.create_array_script" title="Link to this definition">¶</a></dt>
+<dd><p>Create a SLURM array job submission script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.create_slurm_script">
+<span class="sig-name descname"><span class="pre">create_slurm_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_script</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.create_slurm_script"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.create_slurm_script" title="Link to this definition">¶</a></dt>
+<dd><p>Create a SLURM job submission script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.submit_cell_metadata_job">
+<span class="sig-name descname"><span class="pre">submit_cell_metadata_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.submit_cell_metadata_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_cell_metadata_job" title="Link to this definition">¶</a></dt>
+<dd><p>Submit cell metadata processing job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.submit_final_assembly">
+<span class="sig-name descname"><span class="pre">submit_final_assembly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.submit_final_assembly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_final_assembly" title="Link to this definition">¶</a></dt>
+<dd><p>Submit final assembly job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.submit_gene_annotation_job">
+<span class="sig-name descname"><span class="pre">submit_gene_annotation_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.submit_gene_annotation_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_gene_annotation_job" title="Link to this definition">¶</a></dt>
+<dd><p>Submit gene annotation processing job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.submit_job">
+<span class="sig-name descname"><span class="pre">submit_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">script_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.submit_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_job" title="Link to this definition">¶</a></dt>
+<dd><p>Submit a SLURM job and return job ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.submit_matrix_processing">
+<span class="sig-name descname"><span class="pre">submit_matrix_processing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.submit_matrix_processing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_matrix_processing" title="Link to this definition">¶</a></dt>
+<dd><p>Submit matrix processing as SLURM array job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.SlurmBuilder.submit_sample_metadata_job">
+<span class="sig-name descname"><span class="pre">submit_sample_metadata_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbatch_extra_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#SlurmBuilder.submit_sample_metadata_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_sample_metadata_job" title="Link to this definition">¶</a></dt>
+<dd><p>Submit sample metadata processing job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarr_steps.main">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.build_cellarr_steps.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarr_steps.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarr_steps.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cellarr.build.build_cellarrdataset">
+<span id="cellarr-build-build-cellarrdataset-module"></span><h2>cellarr.build.build_cellarrdataset module<a class="headerlink" href="#module-cellarr.build.build_cellarrdataset" title="Link to this heading">¶</a></h2>
+<p>Build the <cite>CellArrDatset</cite>.</p>
+<p>The <cite>CellArrDataset</cite> method is designed to store single-cell RNA-seq
+datasets but can be generalized to store any 2-dimensional experimental data.</p>
+<p>This method creates four TileDB files in the directory specified by <cite>output_path</cite>:</p>
+<ul class="simple">
+<li><p><cite>gene_annotation</cite>: A TileDB file containing feature/gene annotations.</p></li>
+<li><p><cite>sample_metadata</cite>: A TileDB file containing sample metadata.</p></li>
+<li><p><cite>cell_metadata</cite>: A TileDB file containing cell metadata including mapping to the samples</p></li>
+</ul>
+<p>they are tagged with in <code class="docutils literal notranslate"><span class="pre">sample_metadata</span></code>.
+- An <cite>assay</cite> TileDB group containing various matrices. This allows the package to
+store multiple different matrices, e.g. ‘counts’, ‘normalized’, ‘scaled’ for the
+same sample/cell and gene attributes.</p>
+<p>The TileDB matrix file is stored in a <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">X</span> <span class="pre">gene</span></code> orientation. This orientation
+is chosen because the fastest-changing dimension as new files are added to the
+collection is usually the cells rather than genes.</p>
+<p>Process:</p>
+<p>1. <strong>Scan the Collection</strong>: Scan the entire collection of files to create
+a unique set of feature ids (e.g. gene symbols). Store this set as the
+<cite>gene_annotation</cite> TileDB file.</p>
+<p>2. <strong>Sample Metadata</strong>: Store sample metadata in <cite>sample_metadata</cite>
+TileDB file. Each file is typically considered a sample, and an automatic
+mapping is created between files and samples.</p>
+<p>3. <strong>Store Cell Metadata</strong>: Store cell metadata in the <cite>cell_metadata</cite>
+TileDB file.</p>
+<p>4. <strong>Remap and Orient Data</strong>: For each dataset in the collection,
+remap and orient the feature dimension using the feature set from Step 1.
+This step ensures consistency in gene measurement and order, even if
+some genes are unmeasured or ordered differently in the original experiments.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">anndata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cellarr</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">build_cellarrdataset</span><span class="p">,</span>
+    <span class="n">CellArrDataset</span><span class="p">,</span>
+    <span class="n">MatrixOptions</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Create a temporary directory</span>
+<span class="n">tempdir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+
+<span class="c1"># Read AnnData objects</span>
+<span class="n">adata1</span> <span class="o">=</span> <span class="n">anndata</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span>
+    <span class="s2">&quot;path/to/object1.h5ad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;r&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># or just provide the path</span>
+<span class="n">adata2</span> <span class="o">=</span> <span class="s2">&quot;path/to/object2.h5ad&quot;</span>
+
+<span class="c1"># Build CellArrDataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">build_cellarrdataset</span><span class="p">(</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="n">tempdir</span><span class="p">,</span>
+    <span class="n">files</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">adata1</span><span class="p">,</span>
+        <span class="n">adata2</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">matrix_options</span><span class="o">=</span><span class="n">MatrixOptions</span><span class="p">(</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarrdataset.build_cellarrdataset">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.build_cellarrdataset.</span></span><span class="sig-name descname"><span class="pre">build_cellarrdataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_annotation=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_metadata=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_metadata=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_metadata_options=SampleMetadataOptions(skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='sample_metadata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_metadata_options=CellMetadataOptions(skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='cell_metadata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_annotation_options=GeneAnnotationOptions(skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_column='index'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='gene_annotation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_options=MatrixOptions(skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consolidate_duplicate_gene_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">sum&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_name='counts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_attr_name='data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint16'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='counts')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize_tiledb=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads=1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarrdataset.html#build_cellarrdataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarrdataset.build_cellarrdataset" title="Link to this definition">¶</a></dt>
+<dd><p>Create the <cite>CellArrDataset</cite> from a list of single-cell experiment objects.</p>
+<p>All files are expected to be consistent and any modifications
+to make them consistent is outside the scope of this function
+and package.</p>
+<p>There’s a few assumptions this process makes:
+- If object in <code class="docutils literal notranslate"><span class="pre">files</span></code> is an <a class="reference external" href="https://anndata.readthedocs.io/en/latest/generated/anndata.AnnData.html#anndata.AnnData" title="(in anndata v0.13.0.dev16+gdaa8f24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnnData</span></code></a>
+or H5AD object, these must contain an assay matrix in the
+layers slot of the object named as <code class="docutils literal notranslate"><span class="pre">layer_matrix_name</span></code> parameter.
+- Feature information must contain a column defined by the parameter
+<code class="docutils literal notranslate"><span class="pre">feature_column</span></code> in the
+<code class="xref py py-class docutils literal notranslate"></code> that
+contains feature ids or gene symbols across all files.
+- If no <code class="docutils literal notranslate"><span class="pre">cell_metadata</span></code> is provided, we scan to count the number of cells
+and create a simple range index.
+- Each file is considered a sample and a mapping between cells and samples
+is automatically created. Hence the sample information provided must match
+the number of input files and is expected to be in the same order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>files</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://anndata.readthedocs.io/en/latest/generated/anndata.AnnData.html#anndata.AnnData" title="(in anndata v0.13.0.dev16+gdaa8f24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnnData</span></code></a>]]</span>) – List of file paths to <cite>H5AD</cite> or <code class="docutils literal notranslate"><span class="pre">AnnData</span></code> objects.</p></li>
+<li><p><strong>output_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to where the output TileDB files should be stored.</p></li>
+<li><p><strong>gene_annotation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>], <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</span>) – <p>A <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> containing the feature/gene
+annotations across all objects.</p>
+<p>Alternatively, may provide a path to the file containing
+a concatenated gene annotations across all datasets.
+In this case, the first row is expected to contain the
+column names and an index column containing the feature ids
+or gene symbols.</p>
+<p>Alternatively, a list or a dictionary of gene symbols.</p>
+<p>Irrespective of the input, the object will be appended
+with a <code class="docutils literal notranslate"><span class="pre">cellarr_gene_index</span></code> column that contains  numerical
+gene index across all objects.</p>
+<p>Defaults to None, then a gene set is generated by scanning all
+objects in <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
+<p>Additional options may be specified by <code class="docutils literal notranslate"><span class="pre">gene_annotations_options</span></code>.</p>
+</p></li>
+<li><p><strong>sample_metadata</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – <p>A <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> containing the sample
+metadata for each file in <code class="docutils literal notranslate"><span class="pre">files</span></code>. Hences the number of rows
+in the dataframe must match the number of <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
+<p>Alternatively, may provide path to the file containing a
+concatenated sample metadata across all cells. In this case,
+the first row is expected to contain the column names.</p>
+<p>Additionally, the order of rows is expected to be in the same
+order as the input list of <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
+<p>Irrespective of the input, this object is appended with a
+<code class="docutils literal notranslate"><span class="pre">cellarr_original_gene_set</span></code> column that contains the original
+set of feature ids (or gene symbols) from the dataset to
+differentiate between zero-expressed vs unmeasured genes. Additional
+columns are added to help with slicing and accessing chunks.</p>
+<p>Defaults to <cite>None</cite>, in which case, we create a simple sample
+metadata dataframe containing the list of datasets.
+Each dataset is named as <code class="docutils literal notranslate"><span class="pre">sample_{i}</span></code> where <cite>i</cite> refers to
+the index position of the object in <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
+<p>Additional options may be specified by <code class="docutils literal notranslate"><span class="pre">sample_metadata_options</span></code>.</p>
+</p></li>
+<li><p><strong>cell_metadata</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – <p>A <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> containing the cell
+metadata for cells across <code class="docutils literal notranslate"><span class="pre">files</span></code>. Hences the number of rows
+in the dataframe must match the number of cells across
+all files.</p>
+<p>Alternatively, may provide path to the file containing a
+concatenated cell metadata across all cells. In this case,
+the first row is expected to contain the column names.</p>
+<p>Additionally, the order of cells is expected to be in the same
+order as the input list of <code class="docutils literal notranslate"><span class="pre">files</span></code>. If the input is a path,
+the file is expected to contain mappings between cells and
+datasets (or samples).</p>
+<p>Defaults to None, we scan all files to count the number of cells,
+then create a simple cell metadata DataFrame containing mappings from
+cells to their associated datasets. Each dataset is named as
+<code class="docutils literal notranslate"><span class="pre">sample_{i}</span></code> where <cite>i</cite> refers to the index position of
+the object in <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
+<p>Additional options may be specified by <code class="docutils literal notranslate"><span class="pre">cell_metadata_options</span></code>.</p>
+</p></li>
+<li><p><strong>sample_metadata_options</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions" title="cellarr.build.build_options.SampleMetadataOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">SampleMetadataOptions</span></code></a></span>) – Optional parameters when generating <code class="docutils literal notranslate"><span class="pre">sample_metadata</span></code> store.</p></li>
+<li><p><strong>cell_metadata_options</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions" title="cellarr.build.build_options.CellMetadataOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">CellMetadataOptions</span></code></a></span>) – Optional parameters when generating <code class="docutils literal notranslate"><span class="pre">cell_metadata</span></code> store.</p></li>
+<li><p><strong>gene_annotation_options</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions" title="cellarr.build.build_options.GeneAnnotationOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneAnnotationOptions</span></code></a></span>) – Optional parameters when generating <code class="docutils literal notranslate"><span class="pre">gene_annotation</span></code> store.</p></li>
+<li><p><strong>matrix_options</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#cellarr.build.build_options.MatrixOptions" title="cellarr.build.build_options.MatrixOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">MatrixOptions</span></code></a>, <a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#cellarr.build.build_options.MatrixOptions" title="cellarr.build.build_options.MatrixOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">MatrixOptions</span></code></a>]]</span>) – Optional parameters when generating <code class="docutils literal notranslate"><span class="pre">matrix</span></code> store.</p></li>
+<li><p><strong>optimize_tiledb</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to run TileDB’s vaccum and consolidation (may take long).</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads.
+Defaults to 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarrdataset.generate_metadata_tiledb_csv">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.build_cellarrdataset.</span></span><span class="sig-name descname"><span class="pre">generate_metadata_tiledb_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunksize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarrdataset.html#generate_metadata_tiledb_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarrdataset.generate_metadata_tiledb_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a metadata TileDB from csv.</p>
+<p>The difference between this and <code class="docutils literal notranslate"><span class="pre">generate_metadata_tiledb_frame</span></code>
+is when the csv is super large and it won’t fit into memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_uri</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – TileDB URI or path to save the file.</p></li>
+<li><p><strong>input</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the csv file. The first row is expected to
+contain the column names.</p></li>
+<li><p><strong>column_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>]</span>) – Dtype for each of the columns.
+Defaults to None.</p></li>
+<li><p><strong>chunksize</strong> – Chunk size to read the dataframe.
+Defaults to 1000.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.build_cellarrdataset.generate_metadata_tiledb_frame">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.build_cellarrdataset.</span></span><span class="sig-name descname"><span class="pre">generate_metadata_tiledb_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_cellarrdataset.html#generate_metadata_tiledb_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_cellarrdataset.generate_metadata_tiledb_frame" title="Link to this definition">¶</a></dt>
+<dd><p>Generate metadata TileDB from a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_uri</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – TileDB URI or path to save the file.</p></li>
+<li><p><strong>input</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span>) – Input dataframe.</p></li>
+<li><p><strong>column_types</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – <p>You can specify type of each column name to cast into.
+“ascii” or <cite>str</cite> works best for most scenarios.</p>
+<p>Defaults to None.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cellarr.build.build_options">
+<span id="cellarr-build-build-options-module"></span><h2>cellarr.build.build_options module<a class="headerlink" href="#module-cellarr.build.build_options" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cellarr.build.build_options.</span></span><span class="sig-name descname"><span class="pre">CellMetadataOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='cell_metadata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_options.html#CellMetadataOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Optional arguments for the <code class="docutils literal notranslate"><span class="pre">cell_metadata</span></code> store for
+<code class="xref py py-func docutils literal notranslate"><span class="pre">build_cellarrdataset()</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.skip">
+<span class="sig-name descname"><span class="pre">skip</span></span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.skip" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to skip generating cell metadata TileDB.
+Defaults to False.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.dtype" title="Link to this definition">¶</a></dt>
+<dd><p>NumPy dtype for the cell dimension.
+Defaults to np.uint32.</p>
+<p>Note: make sure the number of cells fit
+within the integer limits of unsigned-int32.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.tiledb_store_name">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.tiledb_store_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the TileDB file.
+Defaults to “cell_metadata”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.column_names">
+<span class="sig-name descname"><span class="pre">column_names</span></span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.column_names" title="Link to this definition">¶</a></dt>
+<dd><p>List of cell metadata columns to extract from each
+data object. If a column is not available, it is
+represented as ‘NA’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.column_types">
+<span class="sig-name descname"><span class="pre">column_types</span></span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.column_types" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary containing column names as keys
+and the value representing the type to in
+the TileDB. The TileDB will only contain the
+columns listed here. If the column is not present in
+a dataset, it is represented as ‘NA’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__annotations__">
+<span class="sig-name descname"><span class="pre">__annotations__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'column_types':</span> <span class="pre">typing.Dict[str,</span> <span class="pre">numpy.dtype],</span> <span class="pre">'dtype':</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.dtype'&gt;,</span> <span class="pre">'skip':</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;}</span></em><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__annotations__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__dataclass_fields__">
+<span class="sig-name descname"><span class="pre">__dataclass_fields__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'column_types':</span> <span class="pre">Field(name='column_types',type=typing.Dict[str,</span> <span class="pre">numpy.dtype],default=None,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'dtype':</span> <span class="pre">Field(name='dtype',type=&lt;class</span> <span class="pre">'numpy.dtype'&gt;,default=&lt;class</span> <span class="pre">'numpy.uint32'&gt;,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'skip':</span> <span class="pre">Field(name='skip',type=&lt;class</span> <span class="pre">'bool'&gt;,default=False,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">Field(name='tiledb_store_name',type=&lt;class</span> <span class="pre">'str'&gt;,default='cell_metadata',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)}</span></em><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__dataclass_fields__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__dataclass_params__">
+<span class="sig-name descname"><span class="pre">__dataclass_params__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">_DataclassParams(init=True,repr=True,eq=True,order=False,unsafe_hash=False,frozen=False)</span></em><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__dataclass_params__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__eq__" title="Link to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__hash__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='cell_metadata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__match_args__">
+<span class="sig-name descname"><span class="pre">__match_args__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('skip',</span> <span class="pre">'dtype',</span> <span class="pre">'tiledb_store_name',</span> <span class="pre">'column_types')</span></em><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__match_args__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.CellMetadataOptions.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.CellMetadataOptions.__repr__" title="Link to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">column_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">uint32</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">skip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cell_metadata'</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cellarr.build.build_options.</span></span><span class="sig-name descname"><span class="pre">GeneAnnotationOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_column='index'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='gene_annotation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_options.html#GeneAnnotationOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Optional arguments for the <code class="docutils literal notranslate"><span class="pre">gene_annotation</span></code> store for
+<code class="xref py py-func docutils literal notranslate"><span class="pre">build_cellarrdataset()</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.feature_column">
+<span class="sig-name descname"><span class="pre">feature_column</span></span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.feature_column" title="Link to this definition">¶</a></dt>
+<dd><p>Column in <code class="docutils literal notranslate"><span class="pre">var</span></code> containing the feature ids (e.g. gene symbols).
+Defaults to the index of the <code class="docutils literal notranslate"><span class="pre">var</span></code> slot.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.skip">
+<span class="sig-name descname"><span class="pre">skip</span></span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.skip" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to skip generating gene annotation TileDB.
+Defaults to False.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.dtype" title="Link to this definition">¶</a></dt>
+<dd><p>NumPy dtype for the gene dimension.
+Defaults to np.uint32.</p>
+<p>Note: make sure the number of genes fit
+within the integer limits of unsigned-int32.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.tiledb_store_name">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.tiledb_store_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the TileDB file.
+Defaults to “gene_annotation”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.column_types">
+<span class="sig-name descname"><span class="pre">column_types</span></span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.column_types" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary containing column names as keys
+and the value representing the type to in
+the TileDB.</p>
+<p>If <cite>None</cite>, all columns are cast as ‘ascii’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__annotations__">
+<span class="sig-name descname"><span class="pre">__annotations__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'column_types':</span> <span class="pre">typing.Dict[str,</span> <span class="pre">numpy.dtype],</span> <span class="pre">'dtype':</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.dtype'&gt;,</span> <span class="pre">'feature_column':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">'skip':</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;}</span></em><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__annotations__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__dataclass_fields__">
+<span class="sig-name descname"><span class="pre">__dataclass_fields__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'column_types':</span> <span class="pre">Field(name='column_types',type=typing.Dict[str,</span> <span class="pre">numpy.dtype],default=None,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'dtype':</span> <span class="pre">Field(name='dtype',type=&lt;class</span> <span class="pre">'numpy.dtype'&gt;,default=&lt;class</span> <span class="pre">'numpy.uint32'&gt;,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'feature_column':</span> <span class="pre">Field(name='feature_column',type=&lt;class</span> <span class="pre">'str'&gt;,default='index',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'skip':</span> <span class="pre">Field(name='skip',type=&lt;class</span> <span class="pre">'bool'&gt;,default=False,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">Field(name='tiledb_store_name',type=&lt;class</span> <span class="pre">'str'&gt;,default='gene_annotation',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)}</span></em><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__dataclass_fields__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__dataclass_params__">
+<span class="sig-name descname"><span class="pre">__dataclass_params__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">_DataclassParams(init=True,repr=True,eq=True,order=False,unsafe_hash=False,frozen=False)</span></em><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__dataclass_params__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__eq__" title="Link to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__hash__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_column='index'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='gene_annotation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__match_args__">
+<span class="sig-name descname"><span class="pre">__match_args__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('skip',</span> <span class="pre">'feature_column',</span> <span class="pre">'dtype',</span> <span class="pre">'tiledb_store_name',</span> <span class="pre">'column_types')</span></em><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__match_args__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.GeneAnnotationOptions.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.GeneAnnotationOptions.__repr__" title="Link to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">column_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#id5" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">uint32</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">feature_column</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'index'</span></em><a class="headerlink" href="#id6" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">skip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id7" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'gene_annotation'</span></em><a class="headerlink" href="#id8" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cellarr.build.build_options.</span></span><span class="sig-name descname"><span class="pre">MatrixOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consolidate_duplicate_gene_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">sum&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_name='counts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_attr_name='data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint16'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='counts'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_options.html#MatrixOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Optional arguments for the <code class="docutils literal notranslate"><span class="pre">matrix</span></code> store for <code class="xref py py-func docutils literal notranslate"><span class="pre">build_cellarrdataset()</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.matrix_name">
+<span class="sig-name descname"><span class="pre">matrix_name</span></span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.matrix_name" title="Link to this definition">¶</a></dt>
+<dd><p>Matrix name from <code class="docutils literal notranslate"><span class="pre">layers</span></code> slot to add to TileDB.
+Must be consistent across all objects in <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
+<p>Defaults to “counts”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.matrix_attr_name">
+<span class="sig-name descname"><span class="pre">matrix_attr_name</span></span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.matrix_attr_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the matrix to be stored in the TileDB file.
+Defaults to “data”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.consolidate_duplicate_gene_func">
+<span class="sig-name descname"><span class="pre">consolidate_duplicate_gene_func</span></span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.consolidate_duplicate_gene_func" title="Link to this definition">¶</a></dt>
+<dd><p>Function to consolidate when the AnnData object contains
+multiple rows with the same feature id or gene symbol.</p>
+<p>Defaults to <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#sum" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sum()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.skip">
+<span class="sig-name descname"><span class="pre">skip</span></span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.skip" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to skip generating matrix TileDB.
+Defaults to False.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.dtype" title="Link to this definition">¶</a></dt>
+<dd><p>NumPy dtype for the values in the matrix.
+Defaults to np.uint16.</p>
+<p>Note: make sure the matrix values fit
+within the range limits of unsigned-int16.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.tiledb_store_name">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.tiledb_store_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the TileDB file.
+Defaults to <cite>counts</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__annotations__">
+<span class="sig-name descname"><span class="pre">__annotations__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'consolidate_duplicate_gene_func':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">callable&gt;,</span> <span class="pre">'dtype':</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.dtype'&gt;,</span> <span class="pre">'matrix_attr_name':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">'matrix_name':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">'skip':</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;}</span></em><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__annotations__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__dataclass_fields__">
+<span class="sig-name descname"><span class="pre">__dataclass_fields__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'consolidate_duplicate_gene_func':</span> <span class="pre">Field(name='consolidate_duplicate_gene_func',type=&lt;built-in</span> <span class="pre">function</span> <span class="pre">callable&gt;,default=&lt;built-in</span> <span class="pre">function</span> <span class="pre">sum&gt;,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'dtype':</span> <span class="pre">Field(name='dtype',type=&lt;class</span> <span class="pre">'numpy.dtype'&gt;,default=&lt;class</span> <span class="pre">'numpy.uint16'&gt;,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'matrix_attr_name':</span> <span class="pre">Field(name='matrix_attr_name',type=&lt;class</span> <span class="pre">'str'&gt;,default='data',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'matrix_name':</span> <span class="pre">Field(name='matrix_name',type=&lt;class</span> <span class="pre">'str'&gt;,default='counts',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'skip':</span> <span class="pre">Field(name='skip',type=&lt;class</span> <span class="pre">'bool'&gt;,default=False,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">Field(name='tiledb_store_name',type=&lt;class</span> <span class="pre">'str'&gt;,default='counts',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)}</span></em><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__dataclass_fields__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__dataclass_params__">
+<span class="sig-name descname"><span class="pre">__dataclass_params__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">_DataclassParams(init=True,repr=True,eq=True,order=False,unsafe_hash=False,frozen=False)</span></em><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__dataclass_params__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__eq__" title="Link to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__hash__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consolidate_duplicate_gene_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">sum&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_name='counts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_attr_name='data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint16'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='counts'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__match_args__">
+<span class="sig-name descname"><span class="pre">__match_args__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('skip',</span> <span class="pre">'consolidate_duplicate_gene_func',</span> <span class="pre">'matrix_name',</span> <span class="pre">'matrix_attr_name',</span> <span class="pre">'dtype',</span> <span class="pre">'tiledb_store_name')</span></em><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__match_args__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.MatrixOptions.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.MatrixOptions.__repr__" title="Link to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">consolidate_duplicate_gene_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id9" title="Link to this definition">¶</a></dt>
+<dd><p>Return the sum of a ‘start’ value (default: 0) plus an iterable of numbers</p>
+<p>When the iterable is empty, return the start value.
+This function is intended specifically for use with numeric values and may
+reject non-numeric types.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#id10" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">uint16</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">matrix_attr_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data'</span></em><a class="headerlink" href="#id11" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">matrix_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'counts'</span></em><a class="headerlink" href="#id12" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">skip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id13" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'counts'</span></em><a class="headerlink" href="#id14" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cellarr.build.build_options.</span></span><span class="sig-name descname"><span class="pre">SampleMetadataOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='sample_metadata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/build_options.html#SampleMetadataOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Optional arguments for the <code class="docutils literal notranslate"><span class="pre">sample</span></code> store for <code class="xref py py-func docutils literal notranslate"><span class="pre">build_cellarrdataset()</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.skip">
+<span class="sig-name descname"><span class="pre">skip</span></span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.skip" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to skip generating sample TileDB.
+Defaults to False.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.dtype" title="Link to this definition">¶</a></dt>
+<dd><p>NumPy dtype for the sample dimension.
+Defaults to np.uint32.</p>
+<p>Note: make sure the number of samples fit
+within the integer limits of unsigned-int32.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.tiledb_store_name">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.tiledb_store_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the TileDB file.
+Defaults to “sample_metadata”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.column_types">
+<span class="sig-name descname"><span class="pre">column_types</span></span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.column_types" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary containing column names as keys
+and the value representing the type to in
+the TileDB.</p>
+<p>If <cite>None</cite>, all columns are cast as ‘ascii’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__annotations__">
+<span class="sig-name descname"><span class="pre">__annotations__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'column_types':</span> <span class="pre">typing.Dict[str,</span> <span class="pre">numpy.dtype],</span> <span class="pre">'dtype':</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.dtype'&gt;,</span> <span class="pre">'skip':</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;}</span></em><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__annotations__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__dataclass_fields__">
+<span class="sig-name descname"><span class="pre">__dataclass_fields__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'column_types':</span> <span class="pre">Field(name='column_types',type=typing.Dict[str,</span> <span class="pre">numpy.dtype],default=None,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'dtype':</span> <span class="pre">Field(name='dtype',type=&lt;class</span> <span class="pre">'numpy.dtype'&gt;,default=&lt;class</span> <span class="pre">'numpy.uint32'&gt;,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'skip':</span> <span class="pre">Field(name='skip',type=&lt;class</span> <span class="pre">'bool'&gt;,default=False,default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD),</span> <span class="pre">'tiledb_store_name':</span> <span class="pre">Field(name='tiledb_store_name',type=&lt;class</span> <span class="pre">'str'&gt;,default='sample_metadata',default_factory=&lt;dataclasses._MISSING_TYPE</span> <span class="pre">object&gt;,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)}</span></em><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__dataclass_fields__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__dataclass_params__">
+<span class="sig-name descname"><span class="pre">__dataclass_params__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">_DataclassParams(init=True,repr=True,eq=True,order=False,unsafe_hash=False,frozen=False)</span></em><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__dataclass_params__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__eq__" title="Link to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__hash__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiledb_store_name='sample_metadata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__match_args__">
+<span class="sig-name descname"><span class="pre">__match_args__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('skip',</span> <span class="pre">'dtype',</span> <span class="pre">'tiledb_store_name',</span> <span class="pre">'column_types')</span></em><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__match_args__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cellarr.build.build_options.SampleMetadataOptions.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cellarr.build.build_options.SampleMetadataOptions.__repr__" title="Link to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">column_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id15" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#id16" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">uint32</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">skip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id17" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">tiledb_store_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sample_metadata'</span></em><a class="headerlink" href="#id18" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cellarr.build.buildutils_tiledb_array">
+<span id="cellarr-build-buildutils-tiledb-array-module"></span><h2>cellarr.build.buildutils_tiledb_array module<a class="headerlink" href="#module-cellarr.build.buildutils_tiledb_array" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_array.create_group">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_array.</span></span><span class="sig-name descname"><span class="pre">create_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_array.html#create_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_array.create_group" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_array.create_tiledb_array">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_array.</span></span><span class="sig-name descname"><span class="pre">create_tiledb_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_uri_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_dim_length=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_dim_length=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_dim_name='cell_index'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_dim_name='gene_index'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_attr_name='data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_dim_dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_dim_dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_dim_dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sparse=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_array.html#create_tiledb_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_array.create_tiledb_array" title="Link to this definition">¶</a></dt>
+<dd><p>Create a TileDB file with the provided attributes to persistent storage.</p>
+<p>This will materialize the array directory and all
+related schema files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tiledb_uri_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to create the array TileDB file.</p></li>
+<li><p><strong>x_dim_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of entries along the x/fastest-changing dimension.
+e.g. Number of cells.
+Defaults to None, in which case, the max integer value of
+<code class="docutils literal notranslate"><span class="pre">x_dim_dtype</span></code> is used.</p></li>
+<li><p><strong>y_dim_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of entries along the y dimension.
+e.g. Number of genes.
+Defaults to None, in which case, the max integer value of
+<code class="docutils literal notranslate"><span class="pre">y_dim_dtype</span></code> is used.</p></li>
+<li><p><strong>x_dim_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name for the x-dimension.
+Defaults to “cell_index”.</p></li>
+<li><p><strong>y_dim_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name for the y-dimension.
+Defaults to “gene_index”.</p></li>
+<li><p><strong>matrix_attr_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name for the attribute in the array.
+Defaults to “data”.</p></li>
+<li><p><strong>x_dim_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a></span>) – NumPy dtype for the x-dimension.
+Defaults to np.uint32.</p></li>
+<li><p><strong>y_dim_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a></span>) – NumPy dtype for the y-dimension.
+Defaults to np.uint32.</p></li>
+<li><p><strong>matrix_dim_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a></span>) – NumPy dtype for the values in the matrix.
+Defaults to np.uint32.</p></li>
+<li><p><strong>is_sparse</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether the matrix is sparse.
+Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_array.optimize_tiledb_array">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_array.</span></span><span class="sig-name descname"><span class="pre">optimize_tiledb_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_array_uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_array.html#optimize_tiledb_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_array.optimize_tiledb_array" title="Link to this definition">¶</a></dt>
+<dd><p>Consolidate TileDB fragments.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_array.write_csr_matrix_to_tiledb">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_array.</span></span><span class="sig-name descname"><span class="pre">write_csr_matrix_to_tiledb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_array_uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_dtype=&lt;class</span> <span class="pre">'numpy.uint32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_offset=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size=25000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_array.html#write_csr_matrix_to_tiledb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_array.write_csr_matrix_to_tiledb" title="Link to this definition">¶</a></dt>
+<dd><p>Append and save a <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.15.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a> to TileDB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tiledb_array_uri</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://tiledb-inc-tiledb.readthedocs-hosted.com/projects/tiledb-py/en/stable/python-api.html#tiledb.SparseArray" title="(in TileDB-Py v0.33)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseArray</span></code></a>]</span>) – TileDB array object or path to a TileDB object.</p></li>
+<li><p><strong>matrix</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.15.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></span>) – Input matrix to write to TileDB, must be a
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.15.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a> matrix.</p></li>
+<li><p><strong>value_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a></span>) – NumPy dtype to reformat the matrix values.
+Defaults to <code class="docutils literal notranslate"><span class="pre">uint32</span></code>.</p></li>
+<li><p><strong>row_offset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Offset row number to append to matrix.
+Defaults to 0.</p></li>
+<li><p><strong>batch_size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Batch size.
+Defaults to 25000.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cellarr.build.buildutils_tiledb_frame">
+<span id="cellarr-build-buildutils-tiledb-frame-module"></span><h2>cellarr.build.buildutils_tiledb_frame module<a class="headerlink" href="#module-cellarr.build.buildutils_tiledb_frame" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_frame.append_to_tiledb_frame">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_frame.</span></span><span class="sig-name descname"><span class="pre">append_to_tiledb_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_uri_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_frame.html#append_to_tiledb_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_frame.append_to_tiledb_frame" title="Link to this definition">¶</a></dt>
+<dd><p>Create a TileDB file with the provided attributes to persistent storage.</p>
+<p>This will materialize the array directory and all
+related schema files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tiledb_uri_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to create the metadata TileDB file.</p></li>
+<li><p><strong>frame</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span>) – Pandas Dataframe to append to TileDB.</p></li>
+<li><p><strong>row_offset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Row offset to append new rows to.
+Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_chunk">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_frame.</span></span><span class="sig-name descname"><span class="pre">create_tiledb_frame_from_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_uri_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_frame.html#create_tiledb_frame_from_chunk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_chunk" title="Link to this definition">¶</a></dt>
+<dd><p>Create a TileDB file from the DataFrame chunk, to persistent storage. This is used by the importer for large
+datasets stored in csv.</p>
+<p>This will materialize the array directory and all
+related schema files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tiledb_uri_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to create the metadata TileDB file.</p></li>
+<li><p><strong>chunk</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span>) – Pandas data frame.</p></li>
+<li><p><strong>column_types</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>]</span>) – Dictionary specifying the column types for each
+column in the frame.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_column_names">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_frame.</span></span><span class="sig-name descname"><span class="pre">create_tiledb_frame_from_column_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_uri_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_frame.html#create_tiledb_frame_from_column_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_column_names" title="Link to this definition">¶</a></dt>
+<dd><p>Create a TileDB file with the provided attributes to persistent storage.</p>
+<p>This will materialize the array directory and all
+related schema files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tiledb_uri_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to create the metadata TileDB file.</p></li>
+<li><p><strong>column_names</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Column names of the data frame.</p></li>
+<li><p><strong>column_types</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>]</span>) – Dictionary specifying the column types for each
+column in the frame.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_dataframe">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_frame.</span></span><span class="sig-name descname"><span class="pre">create_tiledb_frame_from_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiledb_uri_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_frame.html#create_tiledb_frame_from_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_dataframe" title="Link to this definition">¶</a></dt>
+<dd><p>Create a TileDB file with the provided attributes to persistent storage.</p>
+<p>This will materialize the array directory and all
+related schema files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tiledb_uri_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to create the metadata TileDB file.</p></li>
+<li><p><strong>column_names</strong> – Column names of the data frame.</p></li>
+<li><p><strong>column_types</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Dictionary specifying the column types for each
+column in the frame.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cellarr.build.buildutils_tiledb_frame.infer_column_types">
+<span class="sig-prename descclassname"><span class="pre">cellarr.build.buildutils_tiledb_frame.</span></span><span class="sig-name descname"><span class="pre">infer_column_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cellarr/build/buildutils_tiledb_frame.html#infer_column_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cellarr.build.buildutils_tiledb_frame.infer_column_types" title="Link to this definition">¶</a></dt>
+<dd><p>Infer column types based on pandas types for each column.</p>
+<p>Note: Currently sets all columns to ‘ascii’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frame</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span>) – DataFrame to infer column types from.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.11/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary containing column names as keys and
+value representing the column types.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cellarr.build">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cellarr.build" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="cellarr.ml.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">cellarr.ml package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="cellarr.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">cellarr package</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Jayaram Kancherla
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">cellarr.build package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-cellarr.build.build_cellarr_steps">cellarr.build.build_cellarr_steps module</a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder</span></code></a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.__init__"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.create_array_script"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.create_array_script()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.create_slurm_script"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.create_slurm_script()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_cell_metadata_job"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.submit_cell_metadata_job()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_final_assembly"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.submit_final_assembly()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_gene_annotation_job"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.submit_gene_annotation_job()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_job"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.submit_job()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_matrix_processing"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.submit_matrix_processing()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_sample_metadata_job"><code class="docutils literal notranslate"><span class="pre">SlurmBuilder.submit_sample_metadata_job()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarr_steps.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cellarr.build.build_cellarrdataset">cellarr.build.build_cellarrdataset module</a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_cellarrdataset.build_cellarrdataset"><code class="docutils literal notranslate"><span class="pre">build_cellarrdataset()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarrdataset.generate_metadata_tiledb_csv"><code class="docutils literal notranslate"><span class="pre">generate_metadata_tiledb_csv()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_cellarrdataset.generate_metadata_tiledb_frame"><code class="docutils literal notranslate"><span class="pre">generate_metadata_tiledb_frame()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cellarr.build.build_options">cellarr.build.build_options module</a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions</span></code></a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.skip"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.dtype"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.tiledb_store_name"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.tiledb_store_name</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.column_names"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.column_names</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.column_types"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.column_types</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__annotations__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__annotations__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__dataclass_fields__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__dataclass_fields__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__dataclass_params__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__dataclass_params__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__hash__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__init__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__match_args__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__match_args__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.CellMetadataOptions.__repr__"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.__repr__()</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.column_types</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">CellMetadataOptions.tiledb_store_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions</span></code></a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.feature_column"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.feature_column</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.skip"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.dtype"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.tiledb_store_name"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.tiledb_store_name</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.column_types"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.column_types</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__annotations__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__annotations__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__dataclass_fields__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__dataclass_fields__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__dataclass_params__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__dataclass_params__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__hash__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__init__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__match_args__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__match_args__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.GeneAnnotationOptions.__repr__"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.__repr__()</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.column_types</span></code></a></li>
+<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.feature_column</span></code></a></li>
+<li><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">GeneAnnotationOptions.tiledb_store_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions"><code class="docutils literal notranslate"><span class="pre">MatrixOptions</span></code></a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.matrix_name"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.matrix_name</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.matrix_attr_name"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.matrix_attr_name</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.consolidate_duplicate_gene_func"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.consolidate_duplicate_gene_func</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.skip"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.dtype"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.tiledb_store_name"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.tiledb_store_name</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__annotations__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__annotations__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__dataclass_fields__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__dataclass_fields__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__dataclass_params__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__dataclass_params__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__hash__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__init__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__match_args__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__match_args__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.MatrixOptions.__repr__"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.__repr__()</span></code></a></li>
+<li><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.consolidate_duplicate_gene_func()</span></code></a></li>
+<li><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.matrix_attr_name</span></code></a></li>
+<li><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.matrix_name</span></code></a></li>
+<li><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">MatrixOptions.tiledb_store_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions</span></code></a><ul>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.skip"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.dtype"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.tiledb_store_name"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.tiledb_store_name</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.column_types"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.column_types</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__annotations__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__annotations__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__dataclass_fields__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__dataclass_fields__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__dataclass_params__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__dataclass_params__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__hash__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__init__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__match_args__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__match_args__</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.build_options.SampleMetadataOptions.__repr__"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.__repr__()</span></code></a></li>
+<li><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.column_types</span></code></a></li>
+<li><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.dtype</span></code></a></li>
+<li><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.skip</span></code></a></li>
+<li><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">SampleMetadataOptions.tiledb_store_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cellarr.build.buildutils_tiledb_array">cellarr.build.buildutils_tiledb_array module</a><ul>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_array.create_group"><code class="docutils literal notranslate"><span class="pre">create_group()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_array.create_tiledb_array"><code class="docutils literal notranslate"><span class="pre">create_tiledb_array()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_array.optimize_tiledb_array"><code class="docutils literal notranslate"><span class="pre">optimize_tiledb_array()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_array.write_csr_matrix_to_tiledb"><code class="docutils literal notranslate"><span class="pre">write_csr_matrix_to_tiledb()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cellarr.build.buildutils_tiledb_frame">cellarr.build.buildutils_tiledb_frame module</a><ul>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_frame.append_to_tiledb_frame"><code class="docutils literal notranslate"><span class="pre">append_to_tiledb_frame()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_chunk"><code class="docutils literal notranslate"><span class="pre">create_tiledb_frame_from_chunk()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_column_names"><code class="docutils literal notranslate"><span class="pre">create_tiledb_frame_from_column_names()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_frame.create_tiledb_frame_from_dataframe"><code class="docutils literal notranslate"><span class="pre">create_tiledb_frame_from_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#cellarr.build.buildutils_tiledb_frame.infer_column_types"><code class="docutils literal notranslate"><span class="pre">infer_column_types()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cellarr.build">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=8fa8b3e9"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

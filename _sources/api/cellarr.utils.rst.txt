@@ -1,0 +1,29 @@
+cellarr.utils package
+=====================
+
+Submodules
+----------
+
+cellarr.utils.queryutils\_tiledb\_frame module
+----------------------------------------------
+
+.. automodule:: cellarr.utils.queryutils_tiledb_frame
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cellarr.utils.utils\_anndata module
+-----------------------------------
+
+.. automodule:: cellarr.utils.utils_anndata
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: cellarr.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:

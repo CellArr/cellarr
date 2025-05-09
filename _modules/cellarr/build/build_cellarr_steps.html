@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>cellarr.slurm.build_cellarr_steps - cellarr 0.5.9 documentation</title>
+        <title>cellarr.build.build_cellarr_steps - cellarr 0.6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">cellarr 0.5.9 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">cellarr 0.6.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">cellarr 0.5.9 documentation</span>
+  <span class="sidebar-brand-text">cellarr 0.6.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -208,7 +208,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../notes.html">Usage Notes</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/modules.html">Module Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/cellarr.html">cellarr package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cellarr package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/cellarr.build.html">cellarr.build package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/cellarr.ml.html">cellarr.ml package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/cellarr.slurm.html">cellarr.slurm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/cellarr.utils.html">cellarr.utils package</a></li>
 </ul>
 </li>
 </ul>
@@ -251,7 +254,7 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for cellarr.slurm.build_cellarr_steps</h1><div class="highlight"><pre>
+          <h1>Source code for cellarr.build.build_cellarr_steps</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
@@ -260,7 +263,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cellarr.buildutils_tiledb_array</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_tiledb_array</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cellarr.build.buildutils_tiledb_array</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_tiledb_array</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
@@ -268,12 +271,12 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SlurmBuilder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;SLURM-based builder for CellArrDataset.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SlurmBuilder.__init__">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -313,7 +316,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.create_slurm_script">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.create_slurm_script">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.create_slurm_script">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_slurm_script</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">job_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -348,7 +351,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.create_array_script">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.create_array_script">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.create_array_script">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_array_script</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">job_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -385,7 +388,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.submit_job">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.submit_job">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_job">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">submit_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a SLURM job and return job ID.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;sbatch&quot;</span><span class="p">,</span> <span class="n">script_path</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -393,7 +396,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.submit_gene_annotation_job">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.submit_gene_annotation_job">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_gene_annotation_job">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">submit_gene_annotation_job</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">gene_options</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">python_env</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sbatch_extra_args</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -418,7 +421,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.submit_sample_metadata_job">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.submit_sample_metadata_job">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_sample_metadata_job">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">submit_sample_metadata_job</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">sample_options</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">python_env</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sbatch_extra_args</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -444,7 +447,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.submit_cell_metadata_job">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.submit_cell_metadata_job">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_cell_metadata_job">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">submit_cell_metadata_job</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">cell_options</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">python_env</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sbatch_extra_args</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -470,7 +473,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.submit_matrix_processing">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.submit_matrix_processing">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_matrix_processing">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">submit_matrix_processing</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">matrix_options</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">python_env</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sbatch_extra_args</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
@@ -529,7 +532,7 @@
 
 
 <div class="viewcode-block" id="SlurmBuilder.submit_final_assembly">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.SlurmBuilder.submit_final_assembly">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.SlurmBuilder.submit_final_assembly">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">submit_final_assembly</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">matrix_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">dependencies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">python_env</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sbatch_extra_args</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -552,7 +555,7 @@
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../../api/cellarr.slurm.html#cellarr.slurm.build_cellarr_steps.main">[docs]</a>
+<a class="viewcode-back" href="../../../api/cellarr.build.html#cellarr.build.build_cellarr_steps.main">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Build CellArrDataset using SLURM steps&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--input-manifest&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to JSON manifest file&quot;</span><span class="p">)</span>
@@ -667,7 +670,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=9a3cda14"></script>
+</div><script src="../../../_static/documentation_options.js?v=8fa8b3e9"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

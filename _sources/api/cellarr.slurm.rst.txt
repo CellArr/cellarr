@@ -4,14 +4,6 @@ cellarr.slurm package
 Submodules
 ----------
 
-cellarr.slurm.build\_cellarr\_steps module
-------------------------------------------
-
-.. automodule:: cellarr.slurm.build_cellarr_steps
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
 cellarr.slurm.final\_assembly module
 ------------------------------------
 

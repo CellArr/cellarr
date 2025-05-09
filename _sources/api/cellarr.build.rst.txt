@@ -1,0 +1,53 @@
+cellarr.build package
+=====================
+
+Submodules
+----------
+
+cellarr.build.build\_cellarr\_steps module
+------------------------------------------
+
+.. automodule:: cellarr.build.build_cellarr_steps
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cellarr.build.build\_cellarrdataset module
+------------------------------------------
+
+.. automodule:: cellarr.build.build_cellarrdataset
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cellarr.build.build\_options module
+-----------------------------------
+
+.. automodule:: cellarr.build.build_options
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cellarr.build.buildutils\_tiledb\_array module
+----------------------------------------------
+
+.. automodule:: cellarr.build.buildutils_tiledb_array
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cellarr.build.buildutils\_tiledb\_frame module
+----------------------------------------------
+
+.. automodule:: cellarr.build.buildutils_tiledb_frame
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: cellarr.build
+   :members:
+   :show-inheritance:
+   :undoc-members:
