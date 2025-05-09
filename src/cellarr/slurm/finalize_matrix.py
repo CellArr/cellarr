@@ -2,7 +2,7 @@ import json
 import sys
 from pathlib import Path
 
-from cellarr.buildutils_tiledb_array import optimize_tiledb_array
+from cellarr.build.buildutils_tiledb_array import optimize_tiledb_array
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"

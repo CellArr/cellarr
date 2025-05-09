@@ -34,7 +34,7 @@ from warnings import warn
 import pandas as pd
 import tiledb
 
-from . import queryutils_tiledb_frame as qtd
+from .utils import queryutils_tiledb_frame as qtd
 from .CellArrDatasetSlice import CellArrDatasetSlice
 
 __author__ = "Jayaram Kancherla"

@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import tiledb
-from cellarr.queryutils_tiledb_frame import subset_array
+from cellarr.utils.queryutils_tiledb_frame import subset_array
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"

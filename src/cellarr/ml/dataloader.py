@@ -54,7 +54,7 @@ import random
 from scipy.sparse import coo_matrix, diags
 from torch.utils.data import DataLoader, Dataset, Sampler
 
-from .queryutils_tiledb_frame import subset_frame
+from ..utils.queryutils_tiledb_frame import subset_frame
 
 import logging
 

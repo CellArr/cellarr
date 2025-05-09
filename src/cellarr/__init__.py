@@ -15,7 +15,7 @@ except PackageNotFoundError:  # pragma: no cover
 finally:
     del version, PackageNotFoundError
 
-from .build_options import CellMetadataOptions, GeneAnnotationOptions, MatrixOptions, SampleMetadataOptions
-from .build_cellarrdataset import build_cellarrdataset
+from .build.build_options import CellMetadataOptions, GeneAnnotationOptions, MatrixOptions, SampleMetadataOptions
+from .build.build_cellarrdataset import build_cellarrdataset
 from .CellArrDataset import CellArrDataset
 # from .dataloader import DataLoader
