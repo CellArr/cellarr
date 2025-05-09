@@ -5,8 +5,8 @@ from pathlib import Path
 
 import tiledb
 
-from cellarr import utils_anndata as uad
-from cellarr.buildutils_tiledb_array import write_csr_matrix_to_tiledb
+from cellarr.utils import utils_anndata as uad
+from cellarr.build.buildutils_tiledb_array import write_csr_matrix_to_tiledb
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"

@@ -220,7 +220,7 @@ The package includes a dataloader in the `pytorch-lightning` framework for singl
 This dataloader can be used as a **template** to create custom dataloaders specific to your needs.
 
 ```python
-from cellarr.dataloader import DataModule
+from cellarr.ml.dataloader import DataModule
 
 datamodule = DataModule(
     dataset_path="/path/to/cellar/dir",
@@ -239,7 +239,7 @@ The package also includes a simple autoencoder in the `pytorch-lightning` which 
 
 ```python
 import pytorch_lightning as pl
-from cellarr.autoencoder import AutoEncoder
+from cellarr.ml.autoencoder import AutoEncoder
 
 autoencoder = AutoEncoder(
     n_genes=len(datamodule.gene_indices),

@@ -84,8 +84,8 @@ import pandas as pd
 from . import build_options as bopt
 from . import buildutils_tiledb_array as uta
 from . import buildutils_tiledb_frame as utf
-from . import utils_anndata as uad
-from .CellArrDataset import CellArrDataset
+from ..utils import utils_anndata as uad
+from ..CellArrDataset import CellArrDataset
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"

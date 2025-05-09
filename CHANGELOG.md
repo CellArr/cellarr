@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.6.0
+
+- Reorganize code into modules.
+- Update github action for tests.
+
 ## Version 0.5.6 - 0.5.9
 
 - slrum runner's manifest now accepts an additional key: "sbatch_extra_args", to add any additional SBATCH headers to the generated scripts.

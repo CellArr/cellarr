@@ -18,7 +18,7 @@ def test_consolidate_symbols():
     n = 100
     y = np.eye(n, dtype=int)
     gene_index = [f"gene_{(i % 10)+1}" for i in range(n)]
-    cmat, groups = cellarr.utils_anndata.consolidate_duplicate_symbols(
+    cmat, groups = cellarr.utils.utils_anndata.consolidate_duplicate_symbols(
         y, gene_index, consolidate_duplicate_gene_func=sum
     )
 
@@ -38,7 +38,7 @@ def test_remap_anndata():
     obs_df = pd.DataFrame({"cells": [f"cell1_{j+1}" for j in range(n)]})
     adata = anndata.AnnData(layers={"counts": y}, var=var_df, obs=obs_df)
 
-    cmat = cellarr.utils_anndata.remap_anndata(
+    cmat = cellarr.utils.utils_anndata.remap_anndata(
         adata, feature_set_order={"gene_1": 0, "gene_2": 1}, var_feature_column="index"
     )
 
@@ -47,7 +47,7 @@ def test_remap_anndata():
     assert mat.shape == (100, 2)
     assert len(mat.data) != 0
 
-    cmat = cellarr.utils_anndata.remap_anndata(
+    cmat = cellarr.utils.utils_anndata.remap_anndata(
         adata, feature_set_order={"gene_1": 0, "gene_2": 1}, var_feature_column="names"
     )
 
@@ -58,7 +58,7 @@ def test_remap_anndata():
 
     # test with no matching gene symbols should give me a
     # 0 size data array
-    cmat = cellarr.utils_anndata.remap_anndata(
+    cmat = cellarr.utils.utils_anndata.remap_anndata(
         adata, {"gene_10000": 0, "gene_20000": 1}
     )
 
@@ -68,7 +68,7 @@ def test_remap_anndata():
     assert len(mat.data) == 0
 
     # test with empty array
-    cmat = cellarr.utils_anndata.remap_anndata(adata, {})
+    cmat = cellarr.utils.utils_anndata.remap_anndata(adata, {})
 
     assert isinstance(cmat, dict)
     mat = cmat["counts"]
@@ -87,28 +87,28 @@ def test_extract_info():
     obs_df = pd.DataFrame({"cells": [f"cell1_{j+1}" for j in range(n)]})
     adata = anndata.AnnData(layers={"counts": y}, var=var_df, obs=obs_df)
 
-    cache = cellarr.utils_anndata.extract_anndata_info(
+    cache = cellarr.utils.utils_anndata.extract_anndata_info(
         [adata], obs_subset_columns=["cells", "notexists"]
     )
     assert len(cache) == 1
 
-    gene_symbols = cellarr.utils_anndata.scan_for_features(cache, unique=False)
+    gene_symbols = cellarr.utils.utils_anndata.scan_for_features(cache, unique=False)
 
     assert gene_symbols is not None
     assert len(gene_symbols) == 1
     assert len(gene_symbols[0]) == 100
 
-    ugene_symbols = cellarr.utils_anndata.scan_for_features(cache, unique=True)
+    ugene_symbols = cellarr.utils.utils_anndata.scan_for_features(cache, unique=True)
 
     assert ugene_symbols is not None
     assert len(ugene_symbols) == 10
 
-    cell_counts = cellarr.utils_anndata.scan_for_cellcounts(cache)
+    cell_counts = cellarr.utils.utils_anndata.scan_for_cellcounts(cache)
     assert cell_counts is not None
     assert len(cell_counts) == 1
     assert cell_counts[0] == 100
 
-    cell_meta = cellarr.utils_anndata.scan_for_cellmetadata(cache)
+    cell_meta = cellarr.utils.utils_anndata.scan_for_cellmetadata(cache)
     assert cell_meta is not None
     assert len(cell_meta) == 100
     assert len(cell_meta.columns) == 2

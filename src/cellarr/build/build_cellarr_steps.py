@@ -6,7 +6,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
-from cellarr.buildutils_tiledb_array import create_tiledb_array
+from cellarr.build.buildutils_tiledb_array import create_tiledb_array
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"

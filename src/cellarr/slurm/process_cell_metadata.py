@@ -3,8 +3,8 @@ import sys
 
 import pandas as pd
 
-from cellarr import utils_anndata as uad
-from cellarr.buildutils_tiledb_frame import (
+from cellarr.utils import utils_anndata as uad
+from cellarr.build.buildutils_tiledb_frame import (
     create_tiledb_frame_from_dataframe,
 )
 

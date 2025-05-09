@@ -13,8 +13,8 @@ from cellarr import (
     build_cellarrdataset,
     MatrixOptions,
 )
-from cellarr.dataloader import DataModule
-from cellarr.autoencoder import AutoEncoder
+from cellarr.ml.dataloader import DataModule
+from cellarr.ml.autoencoder import AutoEncoder
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
