@@ -171,4 +171,4 @@ def test_query_cellarrdataset_full_path():
     print(result1)
 
     assert result1 is not None
-    assert result1.matrix[f"{tempdir}/assays/count"].shape == (1, len(adata1_gene_indices))
+    assert result1.matrix[f"{tempdir}/assays/counts"].shape == (1, len(adata1_gene_indices))
