@@ -99,6 +99,7 @@ class CellArrDatasetSlice:
         """
         output = f"{type(self).__name__}(number_of_rows={self.shape[0]}"
         output += f", number_of_columns={self.shape[1]}"
+        output += f", assay_names={list(self.matrix.keys())}"
 
         output += ")"
         return output
@@ -112,5 +113,6 @@ class CellArrDatasetSlice:
 
         output += f"number_of_rows: {self.shape[0]}\n"
         output += f"number_of_columns: {self.shape[1]}\n"
+        output += f"assay_names={list(self.matrix.keys())}\n"
 
         return output

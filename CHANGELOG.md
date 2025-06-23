@@ -1,9 +1,10 @@
 # Changelog
 
-## Version 0.6.0
+## Version 0.6.0 - 0.6.1
 
 - Reorganize code into modules.
 - Update github action for tests.
+- Initialize `CellArrDataset` from absolute paths.
 
 ## Version 0.5.6 - 0.5.9
 

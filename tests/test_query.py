@@ -128,3 +128,47 @@ def test_query_cellarrdataset():
     full_col_slice = cd[:, 1]
     assert full_col_slice is not None
     assert full_col_slice.shape == (1100, 1)
+
+
+def test_query_cellarrdataset_full_path():
+    tempdir = tempfile.mkdtemp()
+
+    adata1 = generate_adata(1000, 100, 10)
+    adata2 = generate_adata(100, 1000, 100)
+
+    dataset = build_cellarrdataset(
+        output_path=tempdir,
+        files=[adata1, adata2],
+        matrix_options=MatrixOptions(dtype=np.float32),
+    )
+
+    assert dataset is not None
+    assert isinstance(dataset, CellArrDataset)
+
+    cd = CellArrDataset.initialize_from_paths(
+        gene_annotation_uri=f"{tempdir}/gene_annotation",
+        cell_metadata_uri=f"{tempdir}/cell_metadata",
+        sample_metadata_uri=f"{tempdir}/sample_metadata",
+        assay_uri=f"{tempdir}/assays/counts"
+    )
+
+    gene_list = ["gene_1", "gene_95", "gene_50"]
+
+    gfp = tiledb.open(f"{tempdir}/gene_annotation", "r")
+
+    genes = gfp.df[:]
+
+    adata1_gene_indices = sorted(
+        [adata1.var.index.tolist().index(x) for x in gene_list]
+    )
+
+    adata2_gene_indices = sorted(
+        [adata2.var.index.tolist().index(x) for x in gene_list]
+    )
+
+    result1 = cd[0, gene_list]
+
+    print(result1)
+
+    assert result1 is not None
+    assert result1.matrix[f"{tempdir}/assays/count"].shape == (1, len(adata1_gene_indices))

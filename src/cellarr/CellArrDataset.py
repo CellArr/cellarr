@@ -34,8 +34,8 @@ from warnings import warn
 import pandas as pd
 import tiledb
 
-from .utils import queryutils_tiledb_frame as qtd
 from .CellArrDatasetSlice import CellArrDatasetSlice
+from .utils import queryutils_tiledb_frame as qtd
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -683,3 +683,49 @@ class CellArrDataset:
     def itercells(self) -> CellArrCellIterator:
         """Iterator over samples."""
         return CellArrCellIterator(self)
+
+    ####
+    ## Intiialize directly from full paths
+    ####
+
+    @classmethod
+    def initialize_from_paths(
+        cls,
+        assay_uri: Union[str, List[str]],
+        gene_annotation_uri: str,
+        cell_metadata_uri: str,
+        sample_metadata_uri: str,
+        config_or_context: Optional[Union[tiledb.Config, tiledb.Ctx]] = None,
+    ):
+        """Initialize from absolute paths to all necessary tiledb files.
+
+        Args:
+            assay_uri:
+                Absolute path to matrix store.
+                Must be in tiledb group specified by ``assay_tiledb_group``.
+
+            gene_annotation_uri:
+                Absolute path to gene annotation store.
+
+            cell_metadata_uri:
+                Absolute path to cell metadata store.
+
+            sample_metadata_uri:
+                Absolute path to sample metadata store.
+
+            config_or_context:
+                Custom TileDB configuration or context.
+                If None, default TileDB Config will be used.
+
+        Returns:
+            A CellArrDataset object.
+        """
+        return cls(
+            dataset_path="",
+            assay_tiledb_group="",
+            assay_uri=assay_uri,
+            gene_annotation_uri=gene_annotation_uri,
+            cell_metadata_uri=cell_metadata_uri,
+            sample_metadata_uri=sample_metadata_uri,
+            config_or_context=config_or_context,
+        )
