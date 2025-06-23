@@ -30,7 +30,7 @@ def process_sample_metadata(args_json: str):
     cell_counts = uad.scan_for_cellcounts(files_cache)
 
     # Create basic sample metadata
-    sample_names = [f"sample_{idx+1}" for idx in range(len(args["files"]))]
+    sample_names = [f"sample_{idx + 1}" for idx in range(len(args["files"]))]
     sample_metadata = pd.DataFrame(
         {"cellarr_sample": sample_names, "cellarr_cell_counts": cell_counts, "cellarr_filename": args["files"]}
     )
