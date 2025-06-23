@@ -35,7 +35,7 @@ def process_cell_metadata(args_json: str):
     # Create sample mapping for each cell
     sample_per_cell = []
     cell_index_in_sample = []
-    sample_names = [f"sample_{idx+1}" for idx in range(len(args["files"]))]
+    sample_names = [f"sample_{idx + 1}" for idx in range(len(args["files"]))]
 
     for idx, count in enumerate(cell_counts):
         sample_per_cell.extend([sample_names[idx]] * count)
