@@ -103,7 +103,7 @@ python {python_script} '{json.dumps(args)}'
 #SBATCH --time={self.time_hours}:00:00
 #SBATCH --mem={self.memory_gb}G
 #SBATCH --cpus-per-task={self.cpus_per_task}
-#SBATCH --array=0-{n_tasks-1}
+#SBATCH --array=0-{n_tasks - 1}
 {sbatch_extra_args}
 """
         if dependencies:
