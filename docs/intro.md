@@ -153,9 +153,7 @@ dataset = build_cellarrdataset(
     output_path=tempdir,
     files=[adata1, adata2],
     matrix_options=MatrixOptions(dtype=np.float32),
-    cell_metadata_options=CellMetadataOptions(
-        column_types={"cellids": "ascii", "tissue": "ascii"}
-    ),
+    cell_metadata_options=CellMetadataOptions(column_types={"cellids": "ascii", "tissue": "ascii"}),
 )
 
 print(dataset)
@@ -221,12 +219,36 @@ Additionally users may also provide the gene space to train their models.
 val_studies = ["study1", "study100"]
 
 gene_list = [
-    "GPNMB", "TREM2", "LPL", "HLA-DQA1", "CD109",
-    "IL6ST", "SDC2", "MSR1", "ALCAM", "SLC1A3",
-    "CD9", "CD59", "MRC1", "SLC11A1", "CPM",
-    "GPR183", "ITGAX", "HLA-DMB", "NRP2", "SV2C",
-    "PTPRJ", "EMP1", "HLA-DQB1", "MERTK", "CD52",
-    "CXCL16", "ABCA1", "HLA-DPB1", "OLR1", "CD83"
+    "GPNMB",
+    "TREM2",
+    "LPL",
+    "HLA-DQA1",
+    "CD109",
+    "IL6ST",
+    "SDC2",
+    "MSR1",
+    "ALCAM",
+    "SLC1A3",
+    "CD9",
+    "CD59",
+    "MRC1",
+    "SLC11A1",
+    "CPM",
+    "GPR183",
+    "ITGAX",
+    "HLA-DMB",
+    "NRP2",
+    "SV2C",
+    "PTPRJ",
+    "EMP1",
+    "HLA-DQB1",
+    "MERTK",
+    "CD52",
+    "CXCL16",
+    "ABCA1",
+    "HLA-DPB1",
+    "OLR1",
+    "CD83",
 ]
 
 datamodule = DataModule(
@@ -279,7 +301,7 @@ params = {
     "max_epochs": 500,
     "logger": True,
     "log_every_n_steps": 1,
-    "limit_train_batches": 100, # to specify number of batches per epoch
+    "limit_train_batches": 100,  # to specify number of batches per epoch
 }
 trainer = pl.Trainer(**params)
 trainer.fit(autoencoder, datamodule=datamodule)

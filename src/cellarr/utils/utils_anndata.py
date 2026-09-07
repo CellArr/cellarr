@@ -1,6 +1,6 @@
 import itertools
 from multiprocessing import Pool
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any
 
 import anndata
 import mopsy
@@ -14,12 +14,12 @@ __license__ = "MIT"
 
 
 def remap_anndata(
-    h5ad_or_adata: Union[str, anndata.AnnData],
+    h5ad_or_adata: str | anndata.AnnData,
     feature_set_order: dict,
     var_feature_column: str = "index",
-    layer_matrix_name: Union[str, List[str]] = "counts",
-    consolidate_duplicate_gene_func: Union[callable, List[callable]] = sum,
-) -> Dict[str, csr_matrix]:
+    layer_matrix_name: str | list[str] = "counts",
+    consolidate_duplicate_gene_func: callable | list[callable] = sum,
+) -> dict[str, csr_matrix]:
     """Extract and remap the count matrix to the provided feature (gene) set order from the :py:class:`~anndata.AnnData`
     object.
 
@@ -136,7 +136,7 @@ def remap_anndata(
 
 
 def consolidate_duplicate_symbols(
-    matrix: Any, feature_ids: List[str], consolidate_duplicate_gene_func: callable
+    matrix: Any, feature_ids: list[str], consolidate_duplicate_gene_func: callable
 ) -> anndata.AnnData:
     """Consolidate duplicate gene symbols.
 
@@ -181,11 +181,11 @@ def _sanitize_frame_with_missing_cols(frame, expected_columns, num_cells):
 
 
 def _extract_info(
-    h5ad_or_adata: Union[str, anndata.AnnData],
+    h5ad_or_adata: str | anndata.AnnData,
     var_feature_column: str = "index",
-    var_subset_columns: List[str] = None,
-    obs_subset_columns: List[str] = None,
-) -> Tuple[List[str], pd.DataFrame, int]:
+    var_subset_columns: list[str] = None,
+    obs_subset_columns: list[str] = None,
+) -> tuple[list[str], pd.DataFrame, int]:
     if isinstance(h5ad_or_adata, str):
         adata = anndata.read_h5ad(h5ad_or_adata, "r")
     else:
@@ -214,9 +214,9 @@ def _wrapper_extract_info(args):
 
 
 def extract_anndata_info(
-    h5ad_or_adata: List[Union[str, anndata.AnnData]],
+    h5ad_or_adata: list[str | anndata.AnnData],
     var_feature_column: str = "index",
-    var_subset_columns: List[str] = None,
+    var_subset_columns: list[str] = None,
     obs_subset_columns: dict = None,
     num_threads: int = 1,
 ):
@@ -247,7 +247,7 @@ def extract_anndata_info(
         return p.map(_wrapper_extract_info, _args)
 
 
-def scan_for_features(cache, unique: bool = True) -> List[str]:
+def scan_for_features(cache, unique: bool = True) -> list[str]:
     """Extract and generate the list of unique feature identifiers across files.
 
     Needs calling :py:func:`~.extract_anndata_info` first.
@@ -270,7 +270,7 @@ def scan_for_features(cache, unique: bool = True) -> List[str]:
     return _features
 
 
-def scan_for_features_annotations(cache, unique: bool = True) -> List[str]:
+def scan_for_features_annotations(cache, unique: bool = True) -> list[str]:
     """Extract and generate feature annotation metadata across all files in cache.
 
     Needs calling :py:func:`~.extract_anndata_info` first.
@@ -291,7 +291,7 @@ def scan_for_features_annotations(cache, unique: bool = True) -> List[str]:
     return _featmeta
 
 
-def scan_for_cellcounts(cache) -> List[int]:
+def scan_for_cellcounts(cache) -> list[int]:
     """Extract cell counts across files.
 
     Needs calling :py:func:`~.extract_anndata_info` first.
@@ -309,7 +309,7 @@ def scan_for_cellcounts(cache) -> List[int]:
     return _cellcounts
 
 
-def scan_for_cellmetadata(cache) -> List[int]:
+def scan_for_cellmetadata(cache) -> list[int]:
     """Extract and merge all cell metadata data frames across files.
 
     Needs calling :py:func:`~.extract_anndata_info` first.
