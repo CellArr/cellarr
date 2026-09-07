@@ -1,9 +1,9 @@
 import os
-import torch
-from torch import nn
-import torch.nn.functional as F
-from typing import List
+
 import pytorch_lightning as pl
+import torch
+import torch.nn.functional as F
+from torch import nn
 
 
 class Encoder(nn.Module):
@@ -13,7 +13,7 @@ class Encoder(nn.Module):
         self,
         n_genes: int,
         latent_dim: int = 128,
-        hidden_dim: List[int] = [1024, 1024],
+        hidden_dim: list[int] = [1024, 1024],
         dropout: float = 0.5,
         input_dropout: float = 0.4,
         residual: bool = False,
@@ -123,7 +123,7 @@ class Decoder(nn.Module):
         self,
         n_genes: int,
         latent_dim: int = 128,
-        hidden_dim: List[int] = [1024, 1024],
+        hidden_dim: list[int] = [1024, 1024],
         dropout: float = 0.5,
         residual: bool = False,
     ):
@@ -227,7 +227,7 @@ class AutoEncoder(pl.LightningModule):
         self,
         n_genes: int,
         latent_dim: int = 128,
-        hidden_dim: List[int] = [1024, 1024],
+        hidden_dim: list[int] = [1024, 1024],
         dropout: float = 0.5,
         input_dropout: float = 0.4,
         lr: float = 5e-3,
