@@ -2,8 +2,8 @@ import json
 
 import numpy as np
 
-from cellarr.utils import utils_anndata as uad
 from cellarr.build.buildutils_tiledb_array import create_tiledb_array, write_csr_matrix_to_tiledb
+from cellarr.utils import utils_anndata as uad
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
