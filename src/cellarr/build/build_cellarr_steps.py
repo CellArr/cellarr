@@ -2,7 +2,6 @@ import argparse
 import json
 import subprocess
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -57,8 +56,8 @@ class SlurmBuilder:
         self,
         job_name: str,
         python_script: str,
-        args: Dict,
-        dependencies: Optional[str] = None,
+        args: dict,
+        dependencies: str | None = None,
         python_env: str = "",
         sbatch_extra_args: str = "",
     ) -> str:
@@ -89,9 +88,9 @@ python {python_script} '{json.dumps(args)}'
         self,
         job_name: str,
         python_script: str,
-        args: Dict,
+        args: dict,
         n_tasks: int,
-        dependencies: Optional[str] = None,
+        dependencies: str | None = None,
         python_env: str = "",
         sbatch_extra_args: str = "",
     ) -> str:
@@ -125,7 +124,7 @@ python {python_script} '{json.dumps(args)}'
         return result.stdout.strip().split()[-1]
 
     def submit_gene_annotation_job(
-        self, files: List[str], gene_options: Dict, python_env: str, sbatch_extra_args: str
+        self, files: list[str], gene_options: dict, python_env: str, sbatch_extra_args: str
     ) -> str:
         """Submit gene annotation processing job."""
         args = {
@@ -147,7 +146,7 @@ python {python_script} '{json.dumps(args)}'
         return self.submit_job(script_path)
 
     def submit_sample_metadata_job(
-        self, files: List[str], sample_options: Dict, dependency: str, python_env: str, sbatch_extra_args: str
+        self, files: list[str], sample_options: dict, dependency: str, python_env: str, sbatch_extra_args: str
     ) -> str:
         """Submit sample metadata processing job."""
         args = {
@@ -170,7 +169,7 @@ python {python_script} '{json.dumps(args)}'
         return self.submit_job(script_path)
 
     def submit_cell_metadata_job(
-        self, files: List[str], cell_options: Dict, dependency: str, python_env: str, sbatch_extra_args: str
+        self, files: list[str], cell_options: dict, dependency: str, python_env: str, sbatch_extra_args: str
     ) -> str:
         """Submit cell metadata processing job."""
         args = {
@@ -193,8 +192,8 @@ python {python_script} '{json.dumps(args)}'
         return self.submit_job(script_path)
 
     def submit_matrix_processing(
-        self, files: List[str], matrix_options: Dict, dependency: str, python_env: str, sbatch_extra_args: str
-    ) -> Tuple[str, str]:
+        self, files: list[str], matrix_options: dict, dependency: str, python_env: str, sbatch_extra_args: str
+    ) -> tuple[str, str]:
         """Submit matrix processing as SLURM array job."""
 
         # Create matrix TileDB array
@@ -249,7 +248,7 @@ python {python_script} '{json.dumps(args)}'
         return array_job_id, final_job_id
 
     def submit_final_assembly(
-        self, matrix_names: List[str], dependencies: List[str], python_env: str, sbatch_extra_args: str
+        self, matrix_names: list[str], dependencies: list[str], python_env: str, sbatch_extra_args: str
     ) -> str:
         """Submit final assembly job."""
         args = {"input_dir": str(self.output_dir), "output_dir": str(self.output_dir), "matrix_names": matrix_names}
