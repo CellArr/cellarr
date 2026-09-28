@@ -77,7 +77,7 @@ dataset = build_cellarrdataset(
     files=[adata1, adata2],
     matrix_options=[
         MatrixOptions(matrix_name="counts", dtype=np.int16),
-        MatrixOptions(matrix_name="log-norm", dtype=np.float32)
+        MatrixOptions(matrix_name="log-norm", dtype=np.float32),
     ],
     num_threads=2,
 )
@@ -118,9 +118,7 @@ dataset = build_cellarrdataset(
     output_path=tempdir,
     files=[adata1, adata2],
     matrix_options=MatrixOptions(dtype=np.float32),
-    cell_metadata_options=CellMetadataOptions(
-        column_types={"cellids": "ascii", "tissue": "ascii"}
-    ),
+    cell_metadata_options=CellMetadataOptions(column_types={"cellids": "ascii", "tissue": "ascii"}),
 )
 
 print(dataset)
@@ -141,7 +139,7 @@ Here’s an example of the manifest file:
 
 ```py
 manifest = {
-    "files": your/list/of/files,
+    "files": your / list / of / files,
     "python_env": """
 ml Miniforge3
 conda activate cellarr
@@ -150,18 +148,13 @@ python --version
 which python
     """,
     "matrix_options": [
-        {
-            "matrix_name": "non_zero_cells",
-            "dtype": "uint32"
-        },
-        {
-            "matrix_name": "pseudo_bulk_log_normed",
-            "dtype": "float32"
-        }
+        {"matrix_name": "non_zero_cells", "dtype": "uint32"},
+        {"matrix_name": "pseudo_bulk_log_normed", "dtype": "float32"},
     ],
 }
 
 import json
+
 json.dump(manifest, open("your/path/to/manifest.json", "w"))
 ```
 
@@ -255,7 +248,7 @@ params = {
     "max_epochs": 500,
     "logger": True,
     "log_every_n_steps": 1,
-    "limit_train_batches": 100, # to specify number of batches per epoch
+    "limit_train_batches": 100,  # to specify number of batches per epoch
 }
 trainer = pl.Trainer(**params)
 trainer.fit(autoencoder, datamodule=datamodule)
