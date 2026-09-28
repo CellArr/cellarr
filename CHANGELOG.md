@@ -72,11 +72,7 @@ dataset = build_cellarrdataset(
 
 Querying follows a similar structure:
 ```python
-cd = CellArrDataset(
-    dataset_path=tempdir,
-    assay_tiledb_group="assays",
-    assay_uri=["counts", "log-norm"]
-)
+cd = CellArrDataset(dataset_path=tempdir, assay_tiledb_group="assays", assay_uri=["counts", "log-norm"])
 ```
 `assay_uri` is relative to `assay_tiledb_group`. For backwards compatibility, `assay_tiledb_group` can be an empty string.
 

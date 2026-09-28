@@ -1,6 +1,5 @@
 import re
 from functools import lru_cache
-from typing import List, Union
 from warnings import warn
 
 import numpy as np
@@ -14,7 +13,7 @@ __license__ = "MIT"
 
 
 @lru_cache
-def get_schema_names_frame(tiledb_obj: tiledb.Array) -> List[str]:
+def get_schema_names_frame(tiledb_obj: tiledb.Array) -> list[str]:
     """Get Attributes from a TileDB object.
 
     Args:
@@ -33,7 +32,7 @@ def get_schema_names_frame(tiledb_obj: tiledb.Array) -> List[str]:
 
 def subset_frame(
     tiledb_obj: tiledb.Array,
-    subset: Union[slice, str],
+    subset: slice | str,
     columns: list,
     primary_key_column_name: str = None,
 ) -> pd.DataFrame:
@@ -90,11 +89,11 @@ def subset_frame(
     return result
 
 
-def _remap_index(indices: List[int]) -> List[int]:
+def _remap_index(indices: list[int]) -> list[int]:
     _map = {}
     _new_indices = []
 
-    for ridx, r in enumerate(list(sorted(set(indices)))):
+    for ridx, r in enumerate(sorted(set(indices))):
         _map[r] = ridx
 
     for r in list(indices):
@@ -105,10 +104,10 @@ def _remap_index(indices: List[int]) -> List[int]:
 
 def subset_array(
     tiledb_obj: tiledb.Array,
-    row_subset: Union[slice, list, tuple],
-    column_subset: Union[slice, list, tuple],
+    row_subset: slice | list | tuple,
+    column_subset: slice | list | tuple,
     shape: tuple,
-) -> Union[np.ndarray, sp.csr_matrix]:
+) -> np.ndarray | sp.csr_matrix:
     """Subset a TileDB storing array data.
 
     Uses multi_index to slice.
@@ -164,7 +163,7 @@ def subset_array(
     return mat
 
 
-def get_a_column(tiledb_obj: tiledb.Array, column_name: Union[str, List[str]]) -> list:
+def get_a_column(tiledb_obj: tiledb.Array, column_name: str | list[str]) -> list:
     """Access column(s) from the TileDB object.
 
     Args:
