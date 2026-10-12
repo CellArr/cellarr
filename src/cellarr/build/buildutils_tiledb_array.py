@@ -1,6 +1,5 @@
 import os
 import shutil
-from typing import Union
 
 import numpy as np
 import tiledb
@@ -103,7 +102,7 @@ def create_tiledb_array(
 
 
 def write_csr_matrix_to_tiledb(
-    tiledb_array_uri: Union[str, tiledb.SparseArray],
+    tiledb_array_uri: str | tiledb.SparseArray,
     matrix: csr_matrix,
     value_dtype: np.dtype = np.uint32,
     row_offset: int = 0,
@@ -176,7 +175,7 @@ def optimize_tiledb_array(tiledb_array_uri: str, verbose: bool = True):
 
     frags = tiledb.array_fragments(tiledb_array_uri)
     if verbose:
-        print("Fragments before consolidation: {}".format(len(frags)))
+        print(f"Fragments before consolidation: {len(frags)}")
 
     cfg = tiledb.Config()
     cfg["sm.consolidation.step_min_frags"] = 1
@@ -186,7 +185,7 @@ def optimize_tiledb_array(tiledb_array_uri: str, verbose: bool = True):
 
     frags = tiledb.array_fragments(tiledb_array_uri)
     if verbose:
-        print("Fragments after consolidation: {}".format(len(frags)))
+        print(f"Fragments after consolidation: {len(frags)}")
 
 
 def create_group(output_path, group_name):

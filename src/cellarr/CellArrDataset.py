@@ -27,8 +27,8 @@ Example:
         print(result1)
 """
 
+from collections.abc import Sequence
 from functools import lru_cache
-from typing import List, Optional, Sequence, Union
 from warnings import warn
 
 import pandas as pd
@@ -101,11 +101,11 @@ class CellArrDataset:
         self,
         dataset_path: str,
         assay_tiledb_group: str = "assays",
-        assay_uri: Union[str, List[str]] = "counts",
+        assay_uri: str | list[str] = "counts",
         gene_annotation_uri: str = "gene_annotation",
         cell_metadata_uri: str = "cell_metadata",
         sample_metadata_uri: str = "sample_metadata",
-        config_or_context: Optional[Union[tiledb.Config, tiledb.Ctx]] = None,
+        config_or_context: tiledb.Config | tiledb.Ctx | None = None,
     ):
         """Initialize a ``CellArrDataset``.
 
@@ -205,7 +205,7 @@ class CellArrDataset:
     ####
     ## Subset methods for the `cell_metadata` TileDB file.
     ####
-    def get_cell_metadata_columns(self) -> List[str]:
+    def get_cell_metadata_columns(self) -> list[str]:
         """Get column names from ``cell_metadata`` store.
 
         Returns:
@@ -227,7 +227,7 @@ class CellArrDataset:
         res = qtd.get_a_column(self._cell_metadata_tdb, column_name=column_name)
         return res[column_name]
 
-    def get_cell_subset(self, subset: Union[slice, tiledb.QueryCondition], columns=None) -> pd.DataFrame:
+    def get_cell_subset(self, subset: slice | tiledb.QueryCondition, columns=None) -> pd.DataFrame:
         """Slice the ``cell_metadata`` store.
 
         Args:
@@ -272,7 +272,7 @@ class CellArrDataset:
     ####
     ## Subset methods for the `gene_annotation` TileDB file.
     ####
-    def get_gene_annotation_columns(self) -> List[str]:
+    def get_gene_annotation_columns(self) -> list[str]:
         """Get annotation column names from ``gene_annotation`` store.
 
         Returns:
@@ -295,7 +295,7 @@ class CellArrDataset:
         return res[column_name]
 
     @lru_cache(maxsize=128)
-    def get_gene_annotation_index(self) -> List[str]:
+    def get_gene_annotation_index(self) -> list[str]:
         """Get index of the ``gene_annotation`` store.
 
         Returns:
@@ -304,11 +304,11 @@ class CellArrDataset:
         res = qtd.get_a_column(self._gene_annotation_tdb, "cellarr_gene_index")
         return res["cellarr_gene_index"].tolist()
 
-    def _get_indices_for_gene_list(self, query: list) -> List[int]:
+    def _get_indices_for_gene_list(self, query: list) -> list[int]:
         _gene_index = self.get_gene_annotation_index()
         return qtd._match_to_list(_gene_index, query=query)
 
-    def get_gene_subset(self, subset: Union[slice, List[str], tiledb.QueryCondition], columns=None) -> pd.DataFrame:
+    def get_gene_subset(self, subset: slice | list[str] | tiledb.QueryCondition, columns=None) -> pd.DataFrame:
         """Slice the ``gene_metadata`` store.
 
         Args:
@@ -359,7 +359,7 @@ class CellArrDataset:
     ####
     ## Subset methods for the `sample_metadata` TileDB file.
     ####
-    def get_sample_metadata_columns(self) -> List[str]:
+    def get_sample_metadata_columns(self) -> list[str]:
         """Get column names from ``sample_metadata`` store.
 
         Returns:
@@ -381,7 +381,7 @@ class CellArrDataset:
         res = qtd.get_a_column(self._sample_metadata_tdb, column_name=column_name)
         return res[column_name]
 
-    def get_sample_subset(self, subset: Union[slice, tiledb.QueryCondition], columns=None) -> pd.DataFrame:
+    def get_sample_subset(self, subset: slice | tiledb.QueryCondition, columns=None) -> pd.DataFrame:
         """Slice the ``sample_metadata`` store.
 
         Args:
@@ -423,7 +423,7 @@ class CellArrDataset:
         return self._sample_metadata_tdb.nonempty_domain()[0][1] + 1
 
     @lru_cache(maxsize=128)
-    def get_sample_metadata_index(self) -> List[str]:
+    def get_sample_metadata_index(self) -> list[str]:
         """Get index of the ``sample_metadata`` store.
 
         Returns:
@@ -435,7 +435,7 @@ class CellArrDataset:
     ####
     ## Subset methods for the `matrix` TileDB file.
     ####
-    def _get_matrix_subset_uri(self, tiledb_uri, subset: Union[int, Sequence, tuple]) -> pd.DataFrame:
+    def _get_matrix_subset_uri(self, tiledb_uri, subset: int | Sequence | tuple) -> pd.DataFrame:
         """Slice the ``sample_metadata`` store.
 
         Args:
@@ -479,7 +479,7 @@ class CellArrDataset:
             else:
                 raise ValueError(f"`{type(self).__name__}` only supports 2-dimensional slicing.")
 
-    def get_matrix_subset(self, subset: Union[int, Sequence, tuple]) -> pd.DataFrame:
+    def get_matrix_subset(self, subset: int | Sequence | tuple) -> pd.DataFrame:
         """Slice the ``sample_metadata`` store.
 
         Args:
@@ -503,8 +503,8 @@ class CellArrDataset:
     ####
     def get_slice(
         self,
-        cell_subset: Union[slice, tiledb.QueryCondition],
-        gene_subset: Union[slice, List[str], tiledb.QueryCondition],
+        cell_subset: slice | tiledb.QueryCondition,
+        gene_subset: slice | list[str] | tiledb.QueryCondition,
     ) -> CellArrDatasetSlice:
         """Subset a ``CellArrDataset``.
 
@@ -541,7 +541,7 @@ class CellArrDataset:
     ####
     def __getitem__(
         self,
-        args: Union[int, Sequence, tuple],
+        args: int | Sequence | tuple,
     ) -> CellArrDatasetSlice:
         """Subset a ``CellArrDataset``.
 
@@ -632,7 +632,7 @@ class CellArrDataset:
     ## Get all cells for a sample.
     ####
 
-    def get_cells_for_sample(self, sample: Union[int, str]) -> CellArrDatasetSlice:
+    def get_cells_for_sample(self, sample: int | str) -> CellArrDatasetSlice:
         """Slice and access all cells for a sample.
 
         Args:
@@ -691,11 +691,11 @@ class CellArrDataset:
     @classmethod
     def initialize_from_paths(
         cls,
-        assay_uri: Union[str, List[str]],
+        assay_uri: str | list[str],
         gene_annotation_uri: str,
         cell_metadata_uri: str,
         sample_metadata_uri: str,
-        config_or_context: Optional[Union[tiledb.Config, tiledb.Ctx]] = None,
+        config_or_context: tiledb.Config | tiledb.Ctx | None = None,
     ):
         """Initialize from absolute paths to all necessary tiledb files.
 
