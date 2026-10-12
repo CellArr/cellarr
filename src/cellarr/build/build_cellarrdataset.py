@@ -75,17 +75,16 @@ Example:
 import os
 import warnings
 from multiprocessing import get_context
-from typing import Dict, List, Union
 
 import anndata
 import numpy as np
 import pandas as pd
 
+from ..CellArrDataset import CellArrDataset
+from ..utils import utils_anndata as uad
 from . import build_options as bopt
 from . import buildutils_tiledb_array as uta
 from . import buildutils_tiledb_frame as utf
-from ..utils import utils_anndata as uad
-from ..CellArrDataset import CellArrDataset
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -94,15 +93,15 @@ __license__ = "MIT"
 
 # TODO: Accept files as a dictionary with names to each dataset.
 def build_cellarrdataset(
-    files: List[Union[str, anndata.AnnData]],
+    files: list[str | anndata.AnnData],
     output_path: str,
-    gene_annotation: Union[List[str], str, pd.DataFrame] = None,
-    sample_metadata: Union[pd.DataFrame, str] = None,
-    cell_metadata: Union[pd.DataFrame, str] = None,
+    gene_annotation: list[str] | str | pd.DataFrame = None,
+    sample_metadata: pd.DataFrame | str = None,
+    cell_metadata: pd.DataFrame | str = None,
     sample_metadata_options: bopt.SampleMetadataOptions = bopt.SampleMetadataOptions(),
     cell_metadata_options: bopt.CellMetadataOptions = bopt.CellMetadataOptions(),
     gene_annotation_options: bopt.GeneAnnotationOptions = bopt.GeneAnnotationOptions(),
-    matrix_options: Union[bopt.MatrixOptions, List[bopt.MatrixOptions]] = bopt.MatrixOptions(),
+    matrix_options: bopt.MatrixOptions | list[bopt.MatrixOptions] = bopt.MatrixOptions(),
     optimize_tiledb: bool = True,
     num_threads: int = 1,
 ):
@@ -554,7 +553,7 @@ def generate_metadata_tiledb_frame(output_uri: str, input: pd.DataFrame, column_
 def generate_metadata_tiledb_csv(
     output_uri: str,
     input: str,
-    column_dtype: Dict[str, np.dtype] = None,
+    column_dtype: dict[str, np.dtype] = None,
     index_col: bool = False,
     chunksize=1000,
 ):
