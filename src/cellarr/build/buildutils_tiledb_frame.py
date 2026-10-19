@@ -1,6 +1,5 @@
 import os
 import shutil
-from typing import Dict, List
 
 import numpy as np
 import pandas as pd
@@ -11,7 +10,7 @@ __copyright__ = "Jayaram Kancherla"
 __license__ = "MIT"
 
 
-def create_tiledb_frame_from_chunk(tiledb_uri_path: str, chunk: pd.DataFrame, column_types: Dict[str, np.dtype]):
+def create_tiledb_frame_from_chunk(tiledb_uri_path: str, chunk: pd.DataFrame, column_types: dict[str, np.dtype]):
     """Create a TileDB file from the DataFrame chunk, to persistent storage. This is used by the importer for large
     datasets stored in csv.
 
@@ -42,7 +41,7 @@ def create_tiledb_frame_from_chunk(tiledb_uri_path: str, chunk: pd.DataFrame, co
 
 
 def create_tiledb_frame_from_column_names(
-    tiledb_uri_path: str, column_names: List[str], column_types: Dict[str, np.dtype]
+    tiledb_uri_path: str, column_names: list[str], column_types: dict[str, np.dtype]
 ):
     """Create a TileDB file with the provided attributes to persistent storage.
 
@@ -76,7 +75,7 @@ def create_tiledb_frame_from_column_names(
     )
 
 
-def create_tiledb_frame_from_dataframe(tiledb_uri_path: str, frame: List[str], column_types: dict = None):
+def create_tiledb_frame_from_dataframe(tiledb_uri_path: str, frame: list[str], column_types: dict = None):
     """Create a TileDB file with the provided attributes to persistent storage.
 
     This will materialize the array directory and all
@@ -121,7 +120,7 @@ def append_to_tiledb_frame(tiledb_uri_path: str, frame: pd.DataFrame, row_offset
 
 # TODO: At some point, hopefully figure out an easy way to identify
 # individual column types.
-def infer_column_types(frame: pd.DataFrame, col_types: dict) -> Dict[str, str]:
+def infer_column_types(frame: pd.DataFrame, col_types: dict) -> dict[str, str]:
     """Infer column types based on pandas types for each column.
 
     Note: Currently sets all columns to 'ascii'.
