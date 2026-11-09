@@ -31,11 +31,13 @@ First, let's grab those datasets.
 ```
 
 ```python
-files = ["fc6eb410-6603-4e98-9d5f-32c20ffa2456.h5ad",
-        "da57b970-3c33-49bb-a951-bfc9b99dbd23.h5ad",
-        "e4e24745-5822-4838-8ad9-41e116b71964.h5ad",
-        "e2012ca6-059f-4af7-80fe-886579bfaeee.h5ad",
-        "f9bca543-f82a-4863-bd62-b270b634ea10.h5ad"]
+files = [
+    "fc6eb410-6603-4e98-9d5f-32c20ffa2456.h5ad",
+    "da57b970-3c33-49bb-a951-bfc9b99dbd23.h5ad",
+    "e4e24745-5822-4838-8ad9-41e116b71964.h5ad",
+    "e2012ca6-059f-4af7-80fe-886579bfaeee.h5ad",
+    "f9bca543-f82a-4863-bd62-b270b634ea10.h5ad",
+]
 ```
 
 ## Step 1: Identify Your Feature Space
@@ -90,6 +92,7 @@ def get_cell_annotations(path):
     ad = anndata.read_h5ad(path, "r")
     return ad.obs
 
+
 from tqdm import tqdm
 
 obs = []
@@ -101,8 +104,17 @@ combined_obs = pd.concat(obs, ignore_index=True, axis=0, sort=False).astype(pd.S
 combined_cell_df = combined_obs.reset_index(drop=True)
 
 # Let's keep only the columns we actually care about - goodbye, clutter!
-columns_to_keep = ["donor_id", "sample_source", "tissue_type",
-                  "is_primary_data", "author_cell_type", "cell_type", "disease", "sex", "tissue"]
+columns_to_keep = [
+    "donor_id",
+    "sample_source",
+    "tissue_type",
+    "is_primary_data",
+    "author_cell_type",
+    "cell_type",
+    "disease",
+    "sex",
+    "tissue",
+]
 CELL_ANNOTATIONS_DF = combined_cell_df[columns_to_keep]
 CELL_ANNOTATIONS_DF  # Behold, your streamlined metadata!
 ```
@@ -118,6 +130,7 @@ def process_adata(path):
     ad = anndata.read_h5ad(path)
     ad.layers["counts"] = ad.X  # Move the matrix to where CellArr expects it
     return ad
+
 
 adatas = [process_adata(x) for x in files]  # Apply to all files
 ```
@@ -190,6 +203,7 @@ gene_symbols = my_collection.get_gene_annotation_index()
 
 # Let's grab a random sample to play with
 from random import sample
+
 my_gene_list = sample(gene_symbols, 10)
 print("Random genes to investigate:", my_gene_list)
 ```
@@ -241,6 +255,7 @@ Let's zoom in on Alzheimer's disease cells:
 
 ```python
 import numpy as np
+
 cells_of_interest = np.where(disease_labels == "Alzheimer disease")
 print(f"Found {len(cells_of_interest[0])} cells with Alzheimer's disease!")
 ```
@@ -267,19 +282,14 @@ import seaborn as sns
 # Combine expression data with metadata
 gene_with_meta = pd.concat(
     [
-        pd.DataFrame(
-            ad_exprs.matrix["counts"].todense(),
-            columns=ad_gene_list
-        ).reset_index(drop=True),
-        ad_exprs.cell_metadata.reset_index(drop=True)
+        pd.DataFrame(ad_exprs.matrix["counts"].todense(), columns=ad_gene_list).reset_index(drop=True),
+        ad_exprs.cell_metadata.reset_index(drop=True),
     ],
-    axis=1
+    axis=1,
 )
 
 # Compute total expression by cell_type
-mean_expression_by_cell_type = gene_with_meta[
-    ["cell_type"] + ad_gene_list
-].groupby("cell_type").sum()
+mean_expression_by_cell_type = gene_with_meta[["cell_type"] + ad_gene_list].groupby("cell_type").sum()
 
 sns.heatmap(mean_expression_by_cell_type, cmap="crest")
 ```

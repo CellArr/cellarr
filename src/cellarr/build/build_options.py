@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 import numpy as np
 
@@ -45,7 +44,7 @@ class CellMetadataOptions:
     skip: bool = False
     dtype: np.dtype = np.uint32
     tiledb_store_name: str = "cell_metadata"
-    column_types: Dict[str, np.dtype] = None
+    column_types: dict[str, np.dtype] = None
 
 
 @dataclass
@@ -85,7 +84,7 @@ class GeneAnnotationOptions:
     feature_column: str = "index"
     dtype: np.dtype = np.uint32
     tiledb_store_name: str = "gene_annotation"
-    column_types: Dict[str, np.dtype] = None
+    column_types: dict[str, np.dtype] = None
 
 
 @dataclass
@@ -164,4 +163,4 @@ class SampleMetadataOptions:
     skip: bool = False
     dtype: np.dtype = np.uint32
     tiledb_store_name: str = "sample_metadata"
-    column_types: Dict[str, np.dtype] = None
+    column_types: dict[str, np.dtype] = None
