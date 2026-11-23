@@ -42,21 +42,19 @@ Example:
         )
 """
 
+import logging
 import os
-from typing import List, Optional
+import random
 
 import numpy as np
 import pandas as pd
 import tiledb
 import torch
 from pytorch_lightning import LightningDataModule
-import random
 from scipy.sparse import coo_matrix, diags
 from torch.utils.data import DataLoader, Dataset, Sampler
 
 from ..utils.queryutils_tiledb_frame import subset_frame
-
-import logging
 
 log = logging.getLogger(__name__)
 
@@ -208,8 +206,8 @@ class DataModule(LightningDataModule):
         label_column_name: str = "celltype_id",
         study_column_name: str = "study",
         sample_column_name: str = "cellarr_sample",
-        val_studies: Optional[List[str]] = None,
-        gene_order: Optional[List[str]] = None,
+        val_studies: list[str] | None = None,
+        gene_order: list[str] | None = None,
         batch_size: int = 100,
         sample_size: int = 100,
         num_workers: int = 1,
@@ -218,7 +216,7 @@ class DataModule(LightningDataModule):
         sparse: bool = False,
         sampling_by_class: bool = False,
         remove_singleton_classes: bool = False,
-        min_sample_size: Optional[int] = None,
+        min_sample_size: int | None = None,
         nan_string: str = "nan",
         sampler_cls: Sampler = BaseBatchSampler,
         dataset_cls: Dataset = scDataset,
@@ -374,7 +372,6 @@ class DataModule(LightningDataModule):
                     self.gene_indices.append(genes.index(x))
                 except NameError:
                     log.info(f"Gene not found: {x}")
-                    pass
         else:
             self.gene_indices = [i for i in range(len(genes))]
 
